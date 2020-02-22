@@ -98,6 +98,7 @@ dependencies {
   implementation applicationDependencies.okhttpLoggingInterceptor
   implementation applicationDependencies.room
   implementation applicationDependencies.room_coroutines
+  implementation applicationDependencies.data_binding_validator
 
   //Unit/Integration tests dependencies
   testImplementation unitTestDependencies.kotlin

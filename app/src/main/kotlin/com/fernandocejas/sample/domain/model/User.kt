@@ -1,4 +1,4 @@
-package com.fernandocejas.sample.data.model
+package com.fernandocejas.sample.domain.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

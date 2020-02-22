@@ -15,9 +15,32 @@
  */
 package com.fernandocejas.sample.features.login
 
+import android.os.Bundle
+import android.view.View
 import com.fernandocejas.sample.core.platform.BaseFragment
 import com.fernandocejas.sample.R
+import com.fernandocejas.sample.core.extension.failure
+import com.fernandocejas.sample.core.extension.observe
+import com.fernandocejas.sample.core.extension.viewModel
 
 class LoginFragment : BaseFragment() {
+
     override fun layoutId() = R.layout.fragment_login
+
+    private lateinit var loginViewModel: LoginViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        loginViewModel = viewModel(viewModelFactory) {
+            observe(movies, ::renderMoviesList)
+            failure(failure, ::handleFailure)
+        }
+
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModelFactory.create()
+    }
 }

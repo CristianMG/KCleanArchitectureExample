@@ -25,5 +25,4 @@ class MoviesService
     private val moviesApi by lazy { retrofit.create(MoviesApi::class.java) }
 
     override fun movies() = moviesApi.movies()
-    override fun movieDetails(movieId: Int) = moviesApi.movieDetails(movieId)
 }

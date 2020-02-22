@@ -20,7 +20,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.fernandocejas.sample.data.repository.user.UserEntity
+import com.fernandocejas.sample.data.entity.UserEntity
 import com.fernandocejas.sample.data.repository.user.UserDao
 
 @Database(entities = [UserEntity::class], version = 1, exportSchema = false)

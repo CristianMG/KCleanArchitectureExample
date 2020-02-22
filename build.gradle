@@ -17,6 +17,7 @@ buildscript {
   ext.test_runner = 'android.support.test.runner.AndroidJUnitRunner'
 
   repositories {
+    maven { url 'https://jitpack.io' }
     google()
     jcenter()
   }
@@ -30,6 +31,7 @@ buildscript {
 
 allprojects {
   repositories {
+    maven { url 'https://jitpack.io' }
     google()
     jcenter()
   }

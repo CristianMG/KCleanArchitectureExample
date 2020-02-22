@@ -17,6 +17,7 @@
 package com.fernandocejas.sample.data.repository.user
 
 import androidx.room.*
+import com.fernandocejas.sample.data.entity.UserEntity
 
 @Dao
 interface UserDao {

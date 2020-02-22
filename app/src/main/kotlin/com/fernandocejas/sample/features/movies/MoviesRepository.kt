@@ -27,7 +27,6 @@ import javax.inject.Inject
 
 interface MoviesRepository {
     fun movies(): Either<Failure, List<Movie>>
-    fun movieDetails(movieId: Int): Either<Failure, MovieDetails>
 
     class Network
     @Inject constructor(private val networkHandler: NetworkHandler,
@@ -40,12 +39,6 @@ interface MoviesRepository {
             }
         }
 
-        override fun movieDetails(movieId: Int): Either<Failure, MovieDetails> {
-            return when (networkHandler.isConnected) {
-                true -> request(service.movieDetails(movieId), { it.toMovieDetails() }, MovieDetailsEntity.empty())
-                false, null -> Left(NetworkConnection)
-            }
-        }
 
         private fun <T, R> request(call: Call<T>, transform: (T) -> R, default: T): Either<Failure, R> {
             return try {
@@ -61,14 +54,4 @@ interface MoviesRepository {
     }
 
 
-    /*class Database
-    @Inject constructor(private val service: MoviesService) : MoviesRepository {
-
-        override fun movies(): Either<Failure, List<Movie>> {
-        }
-
-        override fun movieDetails(movieId: Int): Either<Failure, MovieDetails> {
-        }
-
-    }*/
 }

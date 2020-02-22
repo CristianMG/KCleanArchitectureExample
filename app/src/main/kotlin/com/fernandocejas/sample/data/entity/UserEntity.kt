@@ -1,11 +1,11 @@
-package com.fernandocejas.sample.data.repository.user
+package com.fernandocejas.sample.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.fernandocejas.sample.data.model.AvailableTasks
-import com.fernandocejas.sample.data.model.User
+import com.fernandocejas.sample.domain.model.AvailableTasks
+import com.fernandocejas.sample.domain.model.User
 
 @Entity(
         tableName = "user",

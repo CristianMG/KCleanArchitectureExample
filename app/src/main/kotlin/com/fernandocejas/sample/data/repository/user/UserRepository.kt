@@ -17,9 +17,7 @@ package com.fernandocejas.sample.data.repository.user
 
 import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.functional.Either
-import com.fernandocejas.sample.data.model.User
-import retrofit2.Call
-import java.lang.IllegalStateException
+import com.fernandocejas.sample.domain.model.User
 import javax.inject.Inject
 
 interface UserRepository {

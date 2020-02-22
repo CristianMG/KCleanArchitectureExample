@@ -17,7 +17,6 @@ package com.fernandocejas.sample.core.di
 
 import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.core.di.viewmodel.ViewModelModule
-import com.fernandocejas.sample.features.movies.MovieDetailsFragment
 import com.fernandocejas.sample.features.movies.MoviesFragment
 import com.fernandocejas.sample.core.navigation.RouteActivity
 import dagger.Component
@@ -30,5 +29,4 @@ interface ApplicationComponent {
     fun inject(routeActivity: RouteActivity)
 
     fun inject(moviesFragment: MoviesFragment)
-    fun inject(movieDetailsFragment: MovieDetailsFragment)
 }
