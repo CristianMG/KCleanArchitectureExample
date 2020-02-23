@@ -15,7 +15,7 @@
  */
 package com.fernandocejas.sample.core.exception
 
-import java.lang.Exception
+import com.fernandocejas.sample.core.exception.Failure.FeatureFailure
 
 /**
  * Base Class for handling errors/failures/exceptions.

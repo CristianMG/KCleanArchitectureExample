@@ -15,19 +15,10 @@
  */
 package com.fernandocejas.sample.core.navigation
 
-import android.content.ActivityNotFoundException
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import androidx.core.app.ActivityOptionsCompat
-import androidx.fragment.app.FragmentActivity
-import android.view.View
-import android.widget.ImageView
 import com.fernandocejas.sample.domain.Authenticator
+import com.fernandocejas.sample.domain.model.UserRole
 import com.fernandocejas.sample.features.login.LoginActivity
-import com.fernandocejas.sample.features.movies.MovieView
-import com.fernandocejas.sample.features.movies.MoviesActivity
-import com.fernandocejas.sample.core.extension.empty
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -40,41 +31,26 @@ class Navigator
 
     fun showMain(context: Context) {
         when (authenticator.userLoggedIn()) {
-            true -> showMovies(context)
+            true -> {
+                authenticator.userLogged?.let {
+                    if (it.role == UserRole.ROLE_ADMIN) {
+                        showAdminScreen(context)
+                    } else {
+                        showTechnicalScreen(context)
+                    }
+                } ?: run {
+                    showLogin(context)
+                }
+            }
             false -> showLogin(context)
         }
     }
 
-    private fun showMovies(context: Context) = context.startActivity(MoviesActivity.callingIntent(context))
+    private fun showTechnicalScreen(context: Context) {
 
-    private val VIDEO_URL_HTTP = "http://www.youtube.com/watch?v="
-    private val VIDEO_URL_HTTPS = "https://www.youtube.com/watch?v="
-
-    fun openVideo(context: Context, videoUrl: String) {
-        try {
-            context.startActivity(createYoutubeIntent(videoUrl))
-        } catch (ex: ActivityNotFoundException) {
-            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl)))
-        }
     }
 
-    private fun createYoutubeIntent(videoUrl: String): Intent {
-        val videoId = when {
-            videoUrl.startsWith(VIDEO_URL_HTTP) -> videoUrl.replace(VIDEO_URL_HTTP, String.empty())
-            videoUrl.startsWith(VIDEO_URL_HTTPS) -> videoUrl.replace(VIDEO_URL_HTTPS, String.empty())
-            else -> videoUrl
-        }
+    private fun showAdminScreen(context: Context) {
 
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:$videoId"))
-        intent.putExtra("force_fullscreen", true)
-
-        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.M)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        return intent
     }
-
-    class Extras(val transitionSharedElement: View)
 }
-
-

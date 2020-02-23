@@ -20,7 +20,6 @@ import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.BuildConfig
 import com.fernandocejas.sample.data.AppDatabase
 import com.fernandocejas.sample.data.repository.user.UserRepository
-import com.fernandocejas.sample.features.movies.MoviesRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -52,8 +51,6 @@ class ApplicationModule(private val application: AndroidApplication) {
     }
 
     @Provides @Singleton fun providesAppDatabase(context: Context): AppDatabase = AppDatabase.getInstance(context)
-
-    @Provides @Singleton fun provideMoviesRepository(dataSource: MoviesRepository.Network): MoviesRepository = dataSource
 
     @Provides @Singleton fun providesUserRepository(dataSource: UserRepository.Disk): UserRepository = dataSource
 }
