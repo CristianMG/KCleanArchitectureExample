@@ -6,6 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.fernandocejas.sample.domain.model.User
 import com.fernandocejas.sample.domain.model.UserRole
+import com.google.gson.annotations.SerializedName
 
 @Entity(
         tableName = "user",
@@ -13,26 +14,35 @@ import com.fernandocejas.sample.domain.model.UserRole
 )
 data class UserEntity(
 
+        @SerializedName("id")
         @PrimaryKey
         @ColumnInfo(name = "id")
         val id: String,
 
+        @SerializedName("email")
         @ColumnInfo(name = "email")
         val email: String,
 
+        @SerializedName("password")
         @ColumnInfo(name = "password")
         val password: String,
 
+        @SerializedName("name")
         @ColumnInfo(name = "name")
         val name: String,
 
+        @SerializedName("role")
         @ColumnInfo(name = "role")
-        val role: Int
+        val role: Int,
+
+        @SerializedName("typeTaskAvailable")
+        @ColumnInfo(name = "typeTaskAvailable")
+        val typeTaskAvailabe: List<Int>
 
 ) {
 
     /**
-     * To provide the good layer's separation
+     * To provide a good layer's separation
      * @return User
      */
     fun toUserModel(): User =
@@ -41,6 +51,6 @@ data class UserEntity(
 
     companion object {
         const val ROLE_ADMIN = 1
-        const val ROLE_TECHNICAL = 1
+        const val ROLE_TECHNICAL = 2
     }
 }

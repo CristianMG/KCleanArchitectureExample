@@ -10,5 +10,5 @@ data class User(
         val password: String,
         val name: String,
         val role: UserRole,
-        val availableTasks: List<AvailableTasks> = mutableListOf()
+        val availableTasks: List<TypeTask> = mutableListOf()
 ) : Parcelable
