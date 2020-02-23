@@ -16,31 +16,78 @@
 package com.fernandocejas.sample.features.login
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.fernandocejas.sample.core.platform.BaseFragment
+
+import androidx.databinding.DataBindingUtil
+import br.com.ilhasoft.support.validation.Validator
 import com.fernandocejas.sample.R
+import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.extension.failure
 import com.fernandocejas.sample.core.extension.observe
 import com.fernandocejas.sample.core.extension.viewModel
+import com.fernandocejas.sample.core.navigation.Navigator
+import com.fernandocejas.sample.databinding.FragmentLoginBinding
+import com.fernandocejas.sample.domain.model.User
+import javax.inject.Inject
 
-class LoginFragment : BaseFragment() {
 
-    override fun layoutId() = R.layout.fragment_login
+class LoginFragment : BaseFragment(), Validator.ValidationListener {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var binding: FragmentLoginBinding
+    private lateinit var validator: Validator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appComponent.inject(this)
         loginViewModel = viewModel(viewModelFactory) {
-            observe(movies, ::renderMoviesList)
+            observe(loginSuccessful, ::handleLoginSuccessful)
             failure(failure, ::handleFailure)
         }
-
-
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = DataBindingUtil.inflate(
+                inflater, layoutId(), container, false)
+        binding.loginViewModel = loginViewModel
+        binding.handlers = Handlers()
+        validator = Validator(binding)
+        validator.setValidationListener(this)
+        return binding.root
+    }
+
+    //TODO IMPORTANT hardcoded login to test
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModelFactory.create()
+        loginViewModel.email.set("ruben.garcia@gmail.com")
+        loginViewModel.password.set("12345")
+    }
+
+    private fun handleLoginSuccessful(user: User?) {
+        notify(R.string.login_successful)
+        context?.let { navigator.showMain(it) }
+    }
+
+    private fun handleFailure(failure: Failure?) {
+        when (failure) {
+            is Failure.UserNotFound -> notify(R.string.user_not_found)
+        }
+    }
+
+    override fun layoutId() = R.layout.fragment_login
+
+    override fun onValidationError() =
+            notify(R.string.validation_error_message_login)
+
+    override fun onValidationSuccess() = loginViewModel.login()
+
+    inner class Handlers {
+        fun login() = validator.toValidate()
     }
 }

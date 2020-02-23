@@ -1,42 +1,63 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="15dp">
+<layout>
 
-    <View
+    <data>
+
+        <variable
+            name="loginViewModel"
+            type="com.fernandocejas.sample.features.login.LoginViewModel" />
+
+        <variable
+            name="handlers"
+            type="com.fernandocejas.sample.features.login.LoginFragment.Handlers" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
 
-    <EditText
-        android:id="@+id/etUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email_hint"
-        android:inputType="textEmailAddress"
-        app:validateType='@{"email"}' />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="@string/password_hint"
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/etUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_hint"
+            android:inputType="textEmailAddress"
+            android:text="@={loginViewModel.email}"
+            app:validateEmpty='@{true}'
+            app:validateType='@{"email"}' />
 
-    <Button
-        android:id="@+id/btLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/bt_login_text" />
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:text="@={loginViewModel.password}"
+            app:validateEmpty='@{true}' />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        <Button
+            android:id="@+id/btLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:onClick="@{() -> handlers.login()}"
+            android:text="@string/bt_login_text" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>
+

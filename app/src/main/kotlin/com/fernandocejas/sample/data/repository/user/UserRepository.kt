@@ -17,6 +17,7 @@ package com.fernandocejas.sample.data.repository.user
 
 import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.functional.Either
+import com.fernandocejas.sample.data.AppDatabase
 import com.fernandocejas.sample.domain.model.User
 import javax.inject.Inject
 
@@ -25,7 +26,9 @@ interface UserRepository {
     fun users(): Either<Failure, List<User>>
     fun login(email: String, password: String): Either<Failure, User>
 
-    class Disk @Inject constructor(private val cache: UserDao) : UserRepository {
+    class Disk @Inject constructor(private val appDatabase: AppDatabase) : UserRepository {
+
+        private val cache: UserDao get() = appDatabase.userDAO()
 
         override fun users(): Either<Failure, List<User>> =
                 Either.wrapFunction {

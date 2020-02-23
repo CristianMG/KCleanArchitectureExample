@@ -19,6 +19,7 @@ import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.core.di.viewmodel.ViewModelModule
 import com.fernandocejas.sample.features.movies.MoviesFragment
 import com.fernandocejas.sample.core.navigation.RouteActivity
+import com.fernandocejas.sample.features.login.LoginFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -29,4 +30,5 @@ interface ApplicationComponent {
     fun inject(routeActivity: RouteActivity)
 
     fun inject(moviesFragment: MoviesFragment)
+    fun inject(loginFragment: LoginFragment)
 }

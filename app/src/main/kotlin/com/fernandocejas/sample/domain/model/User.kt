@@ -9,5 +9,6 @@ data class User(
         val email: String,
         val password: String,
         val name: String,
+        val role: UserRole,
         val availableTasks: List<AvailableTasks> = mutableListOf()
 ) : Parcelable

@@ -13,4 +13,7 @@
     <string name="product_supplier">Reponedorde productos</string>
     <string name="collector">Cobrar</string>
     <string name="wrapper">Envolver</string>
+    <string name="validation_error_message_login">Please input the credentials properly</string>
+    <string name="user_not_found">User not found</string>
+    <string name="login_successful">Login successful</string>
 </resources>

@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.fernandocejas.sample.domain.model.AvailableTasks
 import com.fernandocejas.sample.domain.model.User
+import com.fernandocejas.sample.domain.model.UserRole
 
 @Entity(
         tableName = "user",
@@ -26,8 +26,8 @@ data class UserEntity(
         @ColumnInfo(name = "name")
         val name: String,
 
-        @ColumnInfo(name = "availableTasks")
-        val availableTasks: List<AvailableTasks> = mutableListOf()
+        @ColumnInfo(name = "role")
+        val role: Int
 
 ) {
 
@@ -36,6 +36,11 @@ data class UserEntity(
      * @return User
      */
     fun toUserModel(): User =
-            User(id, email, password, name, availableTasks)
+            User(id, email, password, name, if (role == ROLE_ADMIN) UserRole.ROLE_ADMIN else UserRole.ROLE_TECHNICAL)
 
+
+    companion object {
+        const val ROLE_ADMIN = 1
+        const val ROLE_TECHNICAL = 1
+    }
 }

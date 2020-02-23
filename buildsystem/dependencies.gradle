@@ -33,6 +33,7 @@ ext {
     //Acceptance Testing
     runner_version = '1.0.2-alpha1'
     espresso_version = '3.0.2-alpha1'
+    assert_k_version = '0.21'
 
     //Development
     leakCanaryVersion = '1.5'
@@ -58,6 +59,7 @@ ext {
             retrofit                : "com.squareup.retrofit2:converter-gson:$retrofit_version",
             okhttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor_version",
             room                    : "androidx.room:room-runtime:$room_version",
+            room_compiler           : "androidx.room:room-compiler:$room_version",
             room_coroutines         : "androidx.room:room-coroutines:$room_coroutines",
             data_binding_validator  : "com.github.Ilhasoft:data-binding-validator:$data_binding_validator"
     ]
@@ -72,11 +74,12 @@ ext {
     ]
 
     acceptanceTesting = [
-            testRunner        : 'androidx.test:runner:1.1.0',
-            testRules         : 'androidx.test:rules:1.1.0',
-            espressoCore      : 'androidx.test.espresso:espresso-core:3.1.0',
-            espressoIntents   : 'androidx.test.espresso:espresso-intents:3.1.0',
-            androidAnnotations: 'androidx.annotation:annotation:1.0.0',
+            testRunner        : "androidx.test.ext:junit:1.1.1",
+            testRules         : "androidx.test:rules:1.1.0",
+            espressoCore      : "androidx.test.espresso:espresso-core:3.1.0",
+            espressoIntents   : "androidx.test.espresso:espresso-intents:3.1.0",
+            androidAnnotations: "androidx.annotation:annotation:1.0.0",
+            assertk           : "com.willowtreeapps.assertk:assertk-jvm:$assert_k_version"
     ]
 
     development = [

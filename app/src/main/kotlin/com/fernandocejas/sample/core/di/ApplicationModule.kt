@@ -18,6 +18,7 @@ package com.fernandocejas.sample.core.di
 import android.content.Context
 import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.BuildConfig
+import com.fernandocejas.sample.data.AppDatabase
 import com.fernandocejas.sample.data.repository.user.UserRepository
 import com.fernandocejas.sample.features.movies.MoviesRepository
 import dagger.Module
@@ -49,6 +50,8 @@ class ApplicationModule(private val application: AndroidApplication) {
         }
         return okHttpClientBuilder.build()
     }
+
+    @Provides @Singleton fun providesAppDatabase(context: Context): AppDatabase = AppDatabase.getInstance(context)
 
     @Provides @Singleton fun provideMoviesRepository(dataSource: MoviesRepository.Network): MoviesRepository = dataSource
 

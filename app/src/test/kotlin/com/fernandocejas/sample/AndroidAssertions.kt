@@ -25,7 +25,7 @@ import org.robolectric.Shadows
 import kotlin.reflect.KClass
 
 infix fun KClass<out AppCompatActivity>.`shouldNavigateTo`(nextActivity: KClass<out AppCompatActivity>) = {
-    val originActivity = Robolectric.buildActivity(this.java).get()
+    val originActivity: AppCompatActivity = Robolectric.buildActivity(this.java).get()
     val shadowActivity = Shadows.shadowOf(originActivity)
     val nextIntent = shadowActivity.peekNextStartedActivity()
 

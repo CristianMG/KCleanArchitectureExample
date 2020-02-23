@@ -20,18 +20,23 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.fernandocejas.sample.data.entity.UserEntity
+import com.fernandocejas.sample.data.repository.user.SampleData
 import com.fernandocejas.sample.data.repository.user.UserDao
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Database(entities = [UserEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun characterDAO(): UserDao
+    abstract fun userDAO(): UserDao
 
     companion object {
 
         private const val DATABASE_NAME = "sdos_test"
-        @Volatile private var instance: AppDatabase? = null
+        @Volatile
+        private var instance: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
             return instance ?: synchronized(this) {
@@ -41,6 +46,20 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+                    .addCallback(object : RoomDatabase.Callback() {
+
+                        /***
+                         * Pre-populate all users in database
+                         * @param db SupportSQLiteDatabase
+                         */
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            GlobalScope.launch {
+                                SampleData.getUsers().forEach {
+                                    getInstance(context).userDAO().insert(it)
+                                }
+                            }
+                        }
+                    })
                     .build()
         }
     }
