@@ -1,45 +1,52 @@
 package com.fernandocejas.sample.data.repository
 
-import android.content.Context
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
+
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.fernandocejas.sample.data.AppDatabase
 import com.fernandocejas.sample.data.SampleData
 import com.fernandocejas.sample.data.repository.user.UserDao
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.IOException
+
 
 @RunWith(AndroidJUnit4::class)
-class UserDaoTest {
-    private lateinit var userDao: UserDao
-    private lateinit var db: AppDatabase
-    private lateinit var context: Context
+class UserDaoTest : DatabaseTest() {
 
-    @Before
-    fun createDb() {
-        context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(
-                context, AppDatabase::class.java).build()
+    private lateinit var userDao: UserDao
+
+    override fun before() {
+        super.before()
         userDao = db.userDAO()
     }
 
-    @After
-    @Throws(IOException::class)
-    fun closeDb() {
-        db.close()
-    }
-
     @Test
-    @Throws(Exception::class)
-    fun saveUserInDatabase() {
+    fun saveUserInDatabaseTest() {
         val user = SampleData.getSingleUser(context)
         userDao.insert(user)
         assertThat(userDao.getAll().first()).isEqualTo(user)
+    }
+
+
+    @Test
+    fun getLoginUserTest() {
+        val data = SampleData.getSampleData(context)
+        data.forEach {
+            userDao.insert(it)
+        }
+
+        val userToLogin = data.random()
+        assertThat(userDao.getByLogin(userToLogin.email, userToLogin.password)).isEqualTo(userToLogin)
+    }
+
+
+    @Test
+    fun getAllTest() {
+        val data = SampleData.getSampleData(context)
+        data.forEach {
+            userDao.insert(it)
+        }
+
+        assertThat(userDao.getAll()).isEqualTo(data)
     }
 }
