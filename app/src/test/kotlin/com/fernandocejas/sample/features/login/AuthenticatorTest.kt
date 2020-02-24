@@ -25,6 +25,6 @@ class AuthenticatorTest : UnitTest() {
     private val authenticator = Authenticator()
 
     @Test fun `returns default value`() {
-        authenticator.userLoggedIn() shouldBe true
+        authenticator.userLoggedIn() shouldBe false
     }
 }

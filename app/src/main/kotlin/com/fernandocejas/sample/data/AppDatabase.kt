@@ -62,8 +62,7 @@ abstract class AppDatabase : RoomDatabase() {
                          */
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             GlobalScope.launch {
-                                val turnsType = object : TypeToken<List<UserEntity>>() {}.type
-                                Gson().fromJson<List<UserEntity>>(context.loadJSONFromAsset("UserSampleData.json"), turnsType).forEach {
+                                SampleData.getSampleData(context).forEach {
                                     getInstance(context).userDAO().insert(it)
                                 }
                             }
