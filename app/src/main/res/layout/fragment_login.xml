@@ -23,6 +23,61 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+<!--        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailEditField"
+            style="@style/LoginInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView3">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEdit"
+                style="@style/Register.Field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_form_email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingStart="4dp"
+                android:paddingLeft="4dp"
+                android:paddingEnd="4dp"
+                android:paddingRight="4dp"
+                android:textColor="@color/black_light" />
+
+        </com.google.android.material.textfield.TextInputLayout>-->
+
+
+<!--
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/enterButton"
+            style="@style/Login.Register.Button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/orange_button"
+            app:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordField"
+            app:rippleColor="@color/white_button_ripple"
+            app:strokeColor="#ced4da"
+            app:strokeWidth="0.5dp" />
+-->
+
+
         <EditText
             android:id="@+id/etUser"
             android:layout_width="match_parent"
