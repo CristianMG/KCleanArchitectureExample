@@ -24,16 +24,17 @@
             android:layout_weight="1" />
 
         <EditText
-            android:id="@+id/etUser"
+            android:id="@+id/etDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email_hint"
-            android:inputType="textEmailAddress"
+            android:hint="@string/description_task"
+            android:inputType="textMultiLine"
+            android:lines="5"
             app:validateEmpty='@{true}'
             app:validateType='@{"email"}' />
 
-        <EditText
-            android:id="@+id/etPassword"
+        <TextView
+            android:id="@+id/etType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

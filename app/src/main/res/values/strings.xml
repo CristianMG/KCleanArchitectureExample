@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Movies Kotlin</string>
+    <string name="app_name">Worker</string>
 
     <string name="action_refresh">Refresh</string>
 
@@ -16,4 +16,5 @@
     <string name="validation_error_message_login">Please input the credentials properly</string>
     <string name="user_not_found">User not found</string>
     <string name="login_successful">Login successful</string>
+    <string name="description_task">Descripción tarea</string>
 </resources>

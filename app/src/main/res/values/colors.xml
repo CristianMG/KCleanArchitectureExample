@@ -8,4 +8,6 @@
     <color name="colorTextSecondary">#7f1a18</color>
 
     <color name="translucentBackground">#ED000000</color>
+    <color name="kcleanArchitecture_blue">#2196F3</color>
+    <color name="white">#FFFFFF</color>
 </resources>

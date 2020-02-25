@@ -18,8 +18,9 @@ package com.fernandocejas.sample.features.admin
 import android.content.Context
 import android.content.Intent
 import com.fernandocejas.sample.core.platform.BaseActivity
+import com.fernandocejas.sample.core.platform.ContentActivity
 
-class AdminActivity : BaseActivity() {
+class AdminActivity : ContentActivity() {
     companion object {
         fun callingIntent(context: Context) = Intent(context, AdminActivity::class.java)
     }
