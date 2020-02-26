@@ -18,15 +18,22 @@ package com.fernandocejas.sample.data.repository.user
 import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.functional.Either
 import com.fernandocejas.sample.data.AppDatabase
+import com.fernandocejas.sample.data.repository.mapping.DateFormat
+import com.fernandocejas.sample.domain.model.TypeTask
 import com.fernandocejas.sample.domain.model.User
+import java.util.*
 import javax.inject.Inject
 
 interface UserRepository {
 
     fun users(): Either<Failure, List<User>>
     fun login(email: String, password: String): Either<Failure, User>
+    fun getUserBySkillLessWorkloadToday(calendar: Calendar, typeTask: TypeTask): Either<Failure, User>
 
-    class Disk @Inject constructor(private val appDatabase: AppDatabase) : UserRepository {
+
+    class Disk @Inject constructor(private val appDatabase: AppDatabase,
+                                   private val dateFormat: DateFormat) : UserRepository {
+
 
         private val cache: UserDao get() = appDatabase.userDAO()
 
@@ -45,6 +52,12 @@ interface UserRepository {
             }
         }
 
+        override fun getUserBySkillLessWorkloadToday(calendar: Calendar, typeTask: TypeTask): Either<Failure, User> =
+                cache.getUserBySkillLessWorkloadToday(dateFormat.parseCalendarToDatabaseFormat(calendar), typeTask.idTask)
+                        ?.toUserModel()
+                        ?.let {
+                            Either.Right(it)
+                        } ?: Either.Left(Failure.UserNotFound)
     }
 
 }

@@ -10,11 +10,23 @@
     <string name="password_hint">Password</string>
     <string name="email_hint">Email</string>
     <string name="bt_login_text">Login</string>
-    <string name="product_supplier">Reponedorde productos</string>
+    <string name="product_supplier">Reponedor de productos</string>
+    <string name="replenish_supplier">Reponer productos</string>
     <string name="collector">Cobrar</string>
     <string name="wrapper">Envolver</string>
     <string name="validation_error_message_login">Please input the credentials properly</string>
     <string name="user_not_found">User not found</string>
     <string name="login_successful">Login successful</string>
     <string name="description_task">Descripción tarea</string>
+    <string name="add_task">Nueva tarea</string>
+    <string name="duration">Duración</string>
+    <string name="type_task">Tarea</string>
+    <string name="minutes">Minutes</string>
+    <string name="hours">Hours</string>
+    <string name="add_new_task">Añadir nueva tarea</string>
+    <string name="select_type_task_to_select">Selecciona el tipo de tarea para asignar</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="the_time_is_required">The time is required</string>
+    <string name="type_task_is_required">Por favor seleccione una tarea</string>
 </resources>

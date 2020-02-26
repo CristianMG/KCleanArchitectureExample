@@ -17,13 +17,20 @@ package com.fernandocejas.sample.features.admin
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import com.fernandocejas.sample.R
 import com.fernandocejas.sample.core.platform.BaseActivity
 import com.fernandocejas.sample.core.platform.ContentActivity
 
 class AdminActivity : ContentActivity() {
+
     companion object {
         fun callingIntent(context: Context) = Intent(context, AdminActivity::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setTitle(R.string.add_task)
+    }
     override fun fragment() = AdminFragment()
 }

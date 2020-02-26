@@ -35,4 +35,15 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(data: UserEntity)
+
+
+    @Query("""
+        SELECT * FROM user WHERE user.id =(
+        SELECT userID FROM (
+        SELECT task.user_id as userID, SUM(task.duration) as amount FROM task WHERE task.date = :date GROUP BY task.user_id HAVING instr(task.type_task,:skill) ORDER BY task.duration ASC LIMIT 1)
+        )
+    """)
+    fun getUserBySkillLessWorkloadToday(date: String, skill: Int): UserEntity?
+
+
 }

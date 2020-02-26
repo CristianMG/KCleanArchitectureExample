@@ -15,6 +15,7 @@
  */
 package com.fernandocejas.sample.features.admin
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,15 +25,13 @@ import com.fernandocejas.sample.core.platform.BaseFragment
 import androidx.databinding.DataBindingUtil
 import br.com.ilhasoft.support.validation.Validator
 import com.fernandocejas.sample.R
-import com.fernandocejas.sample.core.exception.Failure
-import com.fernandocejas.sample.core.extension.failure
-import com.fernandocejas.sample.core.extension.observe
 import com.fernandocejas.sample.core.extension.viewModel
 import com.fernandocejas.sample.core.navigation.Navigator
 import com.fernandocejas.sample.databinding.FragmentAdminBinding
-import com.fernandocejas.sample.databinding.FragmentLoginBinding
-import com.fernandocejas.sample.domain.model.User
 import javax.inject.Inject
+import androidx.appcompat.app.AlertDialog
+import com.fernandocejas.sample.core.extension.observe
+import com.fernandocejas.sample.domain.model.TypeTask
 
 
 class AdminFragment : BaseFragment(), Validator.ValidationListener {
@@ -40,23 +39,26 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
     @Inject
     lateinit var navigator: Navigator
 
-    private lateinit var adminViewModel: AdminViewModel
+    private lateinit var viewModel: AdminViewModel
     private lateinit var binding: FragmentAdminBinding
     private lateinit var validator: Validator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
-        adminViewModel = viewModel(viewModelFactory) {
-            //observe(loginSuccessful, ::handleLoginSuccessful)
-            //failure(failure, ::handleFailure)
+        viewModel = viewModel(viewModelFactory) {
+            observe(typeNotSelectionError) {
+                if (it == true)
+                    notify(R.string.type_task_is_required)
+            }
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(
                 inflater, layoutId(), container, false)
-        binding.adminViewModel = adminViewModel
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         binding.handlers = Handlers()
         validator = Validator(binding)
         validator.setValidationListener(this)
@@ -69,9 +71,34 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
     override fun onValidationError() =
             notify(R.string.validation_error_message_login)
 
-    override fun onValidationSuccess() = adminViewModel.newTask()
+    override fun onValidationSuccess() = viewModel.newTask()
 
     inner class Handlers {
         fun addTask() = validator.toValidate()
+
+        fun showTaskDialog() {
+            context?.let { ctx ->
+                val items = TypeTask.getTaskTypeResource().map { ctx.getString(it) }
+                val itemSelected = viewModel.typeTask.value ?: 0
+                AlertDialog.Builder(ctx)
+                        .setTitle(getString(R.string.select_type_task_to_select))
+                        .setSingleChoiceItems(items.toTypedArray(), itemSelected) { _, selectedIndex ->
+                            viewModel.typeTask.value = selectedIndex
+                        }
+                        .setPositiveButton(getString(R.string.ok), null)
+                        .show()
+            }
+        }
+
+        fun showDurationDialog() {
+
+        }
+
+        fun getTypeTask(index: Int?, context: Context):String {
+            return index?.let {
+                TypeTask.getTaskTypeStringFromIndex(index, context)
+            } ?: context.getString(R.string.type_task)
+        }
+
     }
 }

@@ -18,6 +18,7 @@ package com.fernandocejas.sample.core.navigation
 import android.content.Context
 import com.fernandocejas.sample.domain.Authenticator
 import com.fernandocejas.sample.domain.model.UserRole
+import com.fernandocejas.sample.features.admin.AdminActivity
 import com.fernandocejas.sample.features.login.LoginActivity
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -51,6 +52,6 @@ class Navigator
     }
 
     private fun showAdminScreen(context: Context) {
-
+        context.startActivity(AdminActivity.callingIntent(context))
     }
 }

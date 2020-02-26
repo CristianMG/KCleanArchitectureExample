@@ -22,6 +22,13 @@ import com.fernandocejas.sample.data.entity.TaskEntity
 @Dao
 interface TaskDao {
 
+
+    @Query("""
+            SELECT * FROM task
+            """)
+    fun getAll(): List<TaskEntity>
+
+
     @Query("""
             SELECT * FROM task INNER JOIN user ON task.user_id = user.id WHERE user.id = :userId
             """)

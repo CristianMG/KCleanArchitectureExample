@@ -3,6 +3,7 @@ package com.fernandocejas.sample.data.entity
 import androidx.room.*
 import com.fernandocejas.sample.domain.model.Task
 import com.fernandocejas.sample.domain.model.TypeTask
+import java.time.Duration
 import java.util.*
 
 
@@ -23,7 +24,11 @@ data class TaskEntity(
         @ColumnInfo(name = "type_task")
         val typeTask: Int,
         @ColumnInfo(name = "user_id")
-        val userId: String
+        val userId: String,
+        @ColumnInfo(name = "duration")
+        val duration: Int,
+        @ColumnInfo(name = "date")
+        val date: String
 ) {
 
     /**
@@ -31,7 +36,7 @@ data class TaskEntity(
      * @return User
      */
     fun toTaskModel(): Task =
-            Task(id, parseTypetask())
+            Task(id, parseTypetask(), duration)
 
     /**
      * Disregarded parser only add new items to TypeTask enum

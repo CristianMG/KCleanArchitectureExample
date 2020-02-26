@@ -1,9 +1,13 @@
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="com.fernandocejas.sample.domain.model.TypeTask" />
+
         <variable
-            name="adminViewModel"
+            name="viewModel"
             type="com.fernandocejas.sample.features.admin.AdminViewModel" />
 
         <variable
@@ -11,52 +15,88 @@
             type="com.fernandocejas.sample.features.admin.AdminFragment.Handlers" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="15dp">
 
         <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="1dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="15dp" />
 
-        <EditText
-            android:id="@+id/etDescription"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/description_task"
-            android:inputType="textMultiLine"
-            android:lines="5"
-            app:validateEmpty='@{true}'
-            app:validateType='@{"email"}' />
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:startIconDrawable="@drawable/ic_list_admin_add_task">
 
-        <TextView
-            android:id="@+id/etType"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDescription"
+                style="@style/KCleanArchitecture.Input.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:text="@={viewModel.description}"
+                app:validateEmpty='@{true}' />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilHours"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="@string/password_hint"
-            android:inputType="textPassword"
-            app:validateEmpty='@{true}' />
+            android:layout_marginTop="16dp"
+            android:layout_weight="2"
+            android:hint="@string/hours"
+            app:startIconDrawable="@drawable/ic_clock"
+            app:layout_constraintTop_toBottomOf="@+id/tilDescription">
 
-        <Button
-            android:id="@+id/btLogin"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etHours"
+                style="@style/KCleanArchitecture.Input.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:text="@={viewModel.durationHours}"
+                app:validateEmpty='@{true}' />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tvTypeTask"
+            style="@style/KCleanArchitecture.Input.EventInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
+            android:drawableEnd="@drawable/ic_download"
+            android:onClick="@{() -> handlers.showTaskDialog()}"
+            android:text='@{handlers.getTypeTask(viewModel.typeTask,context)}'
+            app:layout_constraintTop_toBottomOf="@+id/tilHours"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btAddTask"
+            style="@style/KCleanArchitecture.Buttons.BlueButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:onClick="@{() -> handlers.addTask()}"
-            android:text="@string/bt_login_text" />
+            android:text="@string/add_new_task"
+            app:layout_constraintTop_toBottomOf="@+id/tvTypeTask" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
 

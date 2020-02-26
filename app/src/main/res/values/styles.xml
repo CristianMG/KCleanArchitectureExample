@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/kcleanArchitecture_blue</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
@@ -27,8 +28,9 @@
     </style>
 
     <style name="BaseToolbarTheme">
-        <item name="android:textColorPrimary">@color/colorTextSecondary</item>
-        <item name="android:textColorSecondary">@color/colorTextPrimary</item>
+        <item name="android:background">@color/kcleanArchitecture_blue</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
 
     <style name="CustomTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
@@ -39,9 +41,23 @@
     </style>
 
 
+
     <style name="KCleanArchitecture.Input.EditText" parent="@android:style/TextAppearance">
         <item name="android:drawablePadding">15dp</item>
         <item name="android:background">@color/white</item>
+    </style>
+
+    <!-- Use material button with this style>  -->
+    <style name="KCleanArchitecture.Input.EventInput" parent="@android:style/TextAppearance">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:textColor">@color/kcleanArchitecture_blue</item>
+        <item name="android:textSize">15sp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="rippleColor">@color/grey_input</item>
+        <item name="strokeColor">@color/kcleanArchitecture_blue</item>
+        <item name="strokeWidth">1dp</item>
     </style>
 
 
