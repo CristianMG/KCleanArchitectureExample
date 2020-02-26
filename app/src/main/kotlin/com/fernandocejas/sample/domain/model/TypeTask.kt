@@ -15,7 +15,7 @@ enum class TypeTask(val idTask: Int,
     companion object {
 
 
-        fun getTaskTypeStringFromIndex(index: Int, context: Context): String = context.getString(TypeTask.values().get(index).taskTypeResource)
+        fun getTaskTypeStringFromIndex(index: Int, context: Context): String = context.getString(TypeTask.values()[index].taskTypeResource)
 
 
         fun getValuesResources(): List<Int> =

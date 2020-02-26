@@ -30,7 +30,7 @@ class AssignTaskLessWorkloadTechnical
         private val taskRepository: TaskRepository) : UseCase<Unit, AssignTaskLessWorkloadTechnical.Params>() {
 
     override suspend fun run(params: Params) =
-            userRepository.getUserBySkillLessWorkloadToday(Calendar.getInstance(), params.task.typeTask)
+            userRepository.getUserBySkillLessWorkloadToday(params.task.date, params.task.typeTask)
                     .flatMap {
                         taskRepository.insertTaskToUser(params.task, it)
                     }
