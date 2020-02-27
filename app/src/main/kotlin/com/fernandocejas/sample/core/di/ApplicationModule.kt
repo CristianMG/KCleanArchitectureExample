@@ -19,6 +19,8 @@ import android.content.Context
 import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.BuildConfig
 import com.fernandocejas.sample.data.AppDatabase
+import com.fernandocejas.sample.data.repository.mapping.DateFormat
+import com.fernandocejas.sample.data.repository.task.TaskRepository
 import com.fernandocejas.sample.data.repository.user.UserRepository
 import dagger.Module
 import dagger.Provides
@@ -50,7 +52,11 @@ class ApplicationModule(private val application: AndroidApplication) {
         return okHttpClientBuilder.build()
     }
 
+    @Provides @Singleton fun provideDateFormat(): DateFormat = DateFormat.instance
+
     @Provides @Singleton fun providesAppDatabase(context: Context): AppDatabase = AppDatabase.getInstance(context)
 
     @Provides @Singleton fun providesUserRepository(dataSource: UserRepository.Disk): UserRepository = dataSource
+
+    @Provides @Singleton fun providesTaskRepository(dataSource: TaskRepository.Disk): TaskRepository = dataSource
 }

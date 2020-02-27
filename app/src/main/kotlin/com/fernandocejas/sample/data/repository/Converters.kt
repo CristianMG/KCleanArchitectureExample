@@ -1,6 +1,8 @@
 package com.fernandocejas.sample.data.repository
 
 import androidx.room.TypeConverter
+import com.fernandocejas.sample.data.repository.mapping.DateFormat
+import java.util.*
 
 
 class Converters {
@@ -14,5 +16,16 @@ class Converters {
     fun fromArrayList(list: List<Int>): String {
         return list.joinToString(",")
     }
+
+
+    @TypeConverter
+    fun fromString(value: Calendar): String =
+            DateFormat.instance.parseCalendarToDatabaseFormat(value)
+
+
+    @TypeConverter
+    fun fromArrayList(value:String): Calendar =
+            DateFormat.instance.parseDatabaseFormatToCalendar(value)
+
 
 }

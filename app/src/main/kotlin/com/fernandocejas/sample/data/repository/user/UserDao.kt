@@ -18,6 +18,7 @@ package com.fernandocejas.sample.data.repository.user
 
 import androidx.room.*
 import com.fernandocejas.sample.data.entity.UserEntity
+import java.util.*
 
 @Dao
 interface UserDao {
@@ -43,7 +44,7 @@ interface UserDao {
         SELECT task.user_id as userID, SUM(task.duration) as amount FROM task WHERE task.date = :date GROUP BY task.user_id HAVING instr(task.type_task,:skill) ORDER BY task.duration ASC LIMIT 1)
         )
     """)
-    fun getUserBySkillLessWorkloadToday(date: String, skill: Int): UserEntity?
+    fun getUserBySkillLessWorkloadToday(date: Calendar, skill: Int): UserEntity?
 
 
 }

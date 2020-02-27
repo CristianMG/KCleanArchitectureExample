@@ -38,7 +38,7 @@ interface TaskRepository {
         override fun task(): Either<Failure, List<Task>> = Either.wrapFunction { cache.getAll().map { it.toTaskModel() } }
 
         override fun insertTaskToUser(task: Task, user: User) = Either.wrapFunction {
-            cache.insert(TaskEntity(task.id, task.typeTask.idTask, user.id, task.secondsToComplete, dateFormat.parseCalendarToDatabaseFormat(task.date)))
+            cache.insert(TaskEntity(task.id, task.typeTask.idTask, user.id, task.secondsToComplete, task.date))
         }
     }
 

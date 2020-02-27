@@ -26,4 +26,8 @@ class Authenticator
     var userLogged: User? = null
 
     fun userLoggedIn() = userLogged != null
+
+    fun closeSession() {
+        userLogged = null
+    }
 }

@@ -66,7 +66,6 @@ class UserDaoTest : DatabaseTest() {
         /**
          * Prepare the state
          */
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
         val userOne = SampleData.getUser(mutableListOf(TypeTask.WRAPPER, TypeTask.COLLECTOR), UserEntity.ROLE_TECHNICAL)
         val userTwo = SampleData.getUser(mutableListOf(TypeTask.WRAPPER), UserEntity.ROLE_TECHNICAL)
@@ -78,7 +77,7 @@ class UserDaoTest : DatabaseTest() {
         userDao.insert(userThree)
         userDao.insert(userFour)
 
-        val dateNow = dateFormat.format(Calendar.getInstance().time)
+        val dateNow = Calendar.getInstance()
 
         /** Any user can do the work **/
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.PRODUCT_SUPPLIER.idTask)).isNull()
@@ -99,7 +98,7 @@ class UserDaoTest : DatabaseTest() {
         val dateTomorrow = Calendar.getInstance()
         dateTomorrow.add(Calendar.DAY_OF_YEAR, 1)
 
-        taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userThree.id, duration = 5000, date = dateFormat.format(dateTomorrow.time)))
+        taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userThree.id, duration = 5000, date = dateTomorrow))
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.COLLECTOR.idTask)?.id).isEqualTo(userThree.id)
 
     }

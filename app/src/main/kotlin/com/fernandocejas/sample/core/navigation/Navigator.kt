@@ -28,7 +28,7 @@ import javax.inject.Singleton
 class Navigator
 @Inject constructor(private val authenticator: Authenticator) {
 
-    private fun showLogin(context: Context) = context.startActivity(LoginActivity.callingIntent(context))
+    fun showLogin(context: Context) = context.startActivity(LoginActivity.callingIntent(context))
 
     fun showMain(context: Context) {
         when (authenticator.userLoggedIn()) {

@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.fernandocejas.sample.core.platform.BaseViewModel
 import com.fernandocejas.sample.domain.AssignTaskLessWorkloadTechnical
+import com.fernandocejas.sample.domain.Authenticator
 import com.fernandocejas.sample.domain.model.Task
 import com.fernandocejas.sample.domain.model.TypeTask
 import java.util.*
 import javax.inject.Inject
 
 class AdminViewModel @Inject constructor(
+        private val authenticator: Authenticator,
         private val assignTaskLessWorkloadTechnical: AssignTaskLessWorkloadTechnical
 ) : BaseViewModel() {
 
@@ -20,8 +22,12 @@ class AdminViewModel @Inject constructor(
     var description: MutableLiveData<String> = MutableLiveData()
     var typeTask: MutableLiveData<Int> = MutableLiveData()
 
+
     private var _typeNotSelectionError: MutableLiveData<Boolean> = MutableLiveData()
     var typeNotSelectionError: LiveData<Boolean> = _typeNotSelectionError
+
+    private var _taskAddSuccessful: MutableLiveData<Boolean> = MutableLiveData()
+    var taskAddSuccessful: LiveData<Boolean> = _taskAddSuccessful
 
 
     fun newTask() {
@@ -37,9 +43,15 @@ class AdminViewModel @Inject constructor(
 
 
     private fun handleSuccessful(unit: Unit) {
-
+        _taskAddSuccessful.value = true
     }
 
+    fun newTaskAgain() {
+        description.value = ""
+        typeTask.value = null
+        durationHours.value = null
+        durationMinutes.value = null
+    }
 
 
     private fun getTotalDuration(): Int {
@@ -48,5 +60,10 @@ class AdminViewModel @Inject constructor(
         sum += durationMinutes.value?.toIntOrNull() ?: 0 * 60
         return sum
     }
+
+    fun closeSession() {
+        authenticator.closeSession()
+    }
+
 
 }

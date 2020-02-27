@@ -29,4 +29,8 @@
     <string name="cancel">Cancel</string>
     <string name="the_time_is_required">The time is required</string>
     <string name="type_task_is_required">Por favor seleccione una tarea</string>
+    <string name="new_task">Tarea nueva</string>
+    <string name="new_task_was_added">Una nueva tarea fue añadida</string>
+    <string name="new_task_again">Crear otra tarea</string>
+    <string name="close_session">Cerrar sesion</string>
 </resources>

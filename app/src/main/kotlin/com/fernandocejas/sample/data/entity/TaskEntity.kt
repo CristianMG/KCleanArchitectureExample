@@ -28,7 +28,7 @@ data class TaskEntity(
         @ColumnInfo(name = "duration")
         val duration: Int,
         @ColumnInfo(name = "date")
-        val date: String
+        val date: Calendar
 ) {
 
     /**
@@ -36,7 +36,7 @@ data class TaskEntity(
      * @return User
      */
     fun toTaskModel(): Task =
-            Task(id, parseTypetask(), duration)
+            Task(id, parseTypetask(), duration, date)
 
     /**
      * Disregarded parser only add new items to TypeTask enum

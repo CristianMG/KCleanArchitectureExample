@@ -16,6 +16,7 @@
 package com.fernandocejas.sample.features.admin
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,6 +51,25 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
             observe(typeNotSelectionError) {
                 if (it == true)
                     notify(R.string.type_task_is_required)
+            }
+
+            observe(taskAddSuccessful) {
+                context?.let { ctx ->
+                    AlertDialog.Builder(ctx)
+                            .setTitle(R.string.new_task)
+                            .setMessage(R.string.new_task_was_added)
+                            .setPositiveButton(R.string.new_task_again
+                            ) { _, _ ->
+                                viewModel.newTaskAgain()
+                            }
+                            .setNegativeButton(R.string.close_session
+                            ) { _, _ ->
+                                    viewModel.closeSession()
+                                    navigator.showLogin(ctx)
+                                // User cancelled the dialog
+                            }.create().show()
+
+                }
             }
         }
     }
@@ -94,7 +114,7 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
 
         }
 
-        fun getTypeTask(index: Int?, context: Context):String {
+        fun getTypeTask(index: Int?, context: Context): String {
             return index?.let {
                 TypeTask.getTaskTypeStringFromIndex(index, context)
             } ?: context.getString(R.string.type_task)
