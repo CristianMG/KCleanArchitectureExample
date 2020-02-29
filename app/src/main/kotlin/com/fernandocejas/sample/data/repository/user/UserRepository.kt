@@ -56,7 +56,7 @@ interface UserRepository {
                 cache.getUserBySkillLessWorkloadToday(calendar, typeTask.idTask)
                         ?.toUserModel()
                         ?.let {
-                            Either.Right(it)
+                             Either.Right(it)
                         } ?: Either.Left(Failure.UserNotFound)
     }
 

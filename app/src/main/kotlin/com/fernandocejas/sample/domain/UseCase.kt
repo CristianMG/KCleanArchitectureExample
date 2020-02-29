@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.core.interactor
+package com.fernandocejas.sample.domain
 
 import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.functional.Either
@@ -35,12 +35,12 @@ abstract class UseCase<out Type, in Params> where Type : Any {
     abstract suspend fun run(params: Params): Either<Failure, Type>
 
     operator fun invoke(params: Params, onResult: (Either<Failure, Type>) -> Unit = {}) {
-      scope.launch {
-          val result = run(params)
-          withContext(Dispatchers.Main) {
-              onResult(result)
-          }
-      }
+        scope.launch {
+            val result = run(params)
+            withContext(Dispatchers.Main) {
+                onResult(result)
+            }
+        }
     }
 
     class None

@@ -18,12 +18,10 @@ package com.fernandocejas.sample.domain
 import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.functional.Either
 import com.fernandocejas.sample.core.functional.flatMap
-import com.fernandocejas.sample.core.interactor.UseCase
 import com.fernandocejas.sample.data.repository.task.TaskRepository
 import com.fernandocejas.sample.data.repository.user.UserRepository
 import com.fernandocejas.sample.domain.model.Task
 import com.fernandocejas.sample.domain.model.User
-import java.util.*
 import javax.inject.Inject
 
 class AssignTaskLessWorkloadTechnical

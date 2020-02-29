@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fernandocejas.sample.features.admin.AdminViewModel
 import com.fernandocejas.sample.features.login.LoginViewModel
+import com.fernandocejas.sample.features.technical.TechnicalViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -38,5 +39,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AdminViewModel::class)
     abstract fun bindsAdminViewModel(adminViewModel: AdminViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TechnicalViewModel::class)
+    abstract fun bindsTechnicalViewModel(technicalViewModel: TechnicalViewModel): ViewModel
 
 }

@@ -33,7 +33,7 @@ class AdminViewModel @Inject constructor(
 
     fun newTask() {
         typeTask.value?.let { typeTaskId ->
-            val task = Task(UUID.randomUUID().toString(), TypeTask.values()[typeTaskId], getTotalDuration(), Calendar.getInstance())
+            val task = Task(UUID.randomUUID().toString(), TypeTask.values()[typeTaskId], "", description.value ?: "", getTotalDuration(), Calendar.getInstance(), false)
             assignTaskLessWorkloadTechnical(AssignTaskLessWorkloadTechnical.Params(task)) {
                 it.fold(::handleFailure, ::handleSuccessful)
             }
@@ -56,9 +56,8 @@ class AdminViewModel @Inject constructor(
 
 
     private fun getTotalDuration(): Int {
-        var sum = 0
-        sum += durationHours.value?.toIntOrNull() ?: 0 * 60 * 60
-        sum += durationMinutes.value?.toIntOrNull() ?: 0 * 60
+        var sum = durationHours.value?.toInt() ?: 0
+        sum *= 60 * 60
         return sum
     }
 

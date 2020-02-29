@@ -18,10 +18,21 @@ package com.fernandocejas.sample.data.repository.task
 
 import androidx.room.*
 import com.fernandocejas.sample.data.entity.TaskEntity
+import com.fernandocejas.sample.data.entity.UserEntity
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Dao
 interface TaskDao {
 
+
+    @Query("""
+            SELECT * FROM task WHERE task.user_id = :userId
+            """)
+    fun getTaskByUser(userId: String): Flow<List<TaskEntity>>
+
+    fun getTaskByUserUntilChanged(userId: String) =
+            getTaskByUser(userId).distinctUntilChanged()
 
     @Query("""
             SELECT * FROM task
@@ -29,12 +40,9 @@ interface TaskDao {
     fun getAll(): List<TaskEntity>
 
 
-    @Query("""
-            SELECT * FROM task INNER JOIN user ON task.user_id = user.id WHERE user.id = :userId
-            """)
-    fun getTaskByUser(userId: String): List<TaskEntity>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(data: TaskEntity)
 
+    @Update
+    fun updateTask(task: TaskEntity)
 }

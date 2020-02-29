@@ -15,7 +15,6 @@
  */
 package com.fernandocejas.sample.domain
 
-import com.fernandocejas.sample.core.interactor.UseCase
 import com.fernandocejas.sample.data.repository.user.UserRepository
 import com.fernandocejas.sample.domain.model.User
 import javax.inject.Inject

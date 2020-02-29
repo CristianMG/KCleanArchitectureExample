@@ -23,12 +23,16 @@ data class TaskEntity(
         val id: String = UUID.randomUUID().toString(),
         @ColumnInfo(name = "type_task")
         val typeTask: Int,
+        @ColumnInfo(name = "description")
+        val description: String = "",
         @ColumnInfo(name = "user_id")
         val userId: String,
         @ColumnInfo(name = "duration")
         val duration: Int,
         @ColumnInfo(name = "date")
-        val date: Calendar
+        val date: Calendar,
+        @ColumnInfo(name = "complete")
+        val complete: Boolean
 ) {
 
     /**
@@ -36,7 +40,7 @@ data class TaskEntity(
      * @return User
      */
     fun toTaskModel(): Task =
-            Task(id, parseTypetask(), duration, date)
+            Task(id, parseTypetask(), userId, description, duration, date, complete)
 
     /**
      * Disregarded parser only add new items to TypeTask enum

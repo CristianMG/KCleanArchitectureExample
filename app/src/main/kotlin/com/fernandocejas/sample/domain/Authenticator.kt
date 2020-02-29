@@ -23,6 +23,9 @@ import javax.inject.Singleton
 class Authenticator
 @Inject constructor() {
 
+    /**
+     * the user must be saved in shared preferences to avoid problems with recreates's activitys
+     */
     var userLogged: User? = null
 
     fun userLoggedIn() = userLogged != null

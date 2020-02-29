@@ -82,20 +82,20 @@ class UserDaoTest : DatabaseTest() {
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.PRODUCT_SUPPLIER.idTask)).isNull()
 
         /** Test choose the user with less work load **/
-        taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userOne.id, duration = 30, date = dateNow))
-        taskDao.insert(TaskEntity(typeTask = TypeTask.WRAPPER.idTask, userId = userTwo.id, duration = 600, date = dateNow))
-        taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userThree.id, duration = 1000, date = dateNow))
+        taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userOne.id, duration = 30, date = dateNow, complete = false))
+        taskDao.insert(TaskEntity(typeTask = TypeTask.WRAPPER.idTask, userId = userTwo.id, duration = 600, date = dateNow, complete = false))
+        taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userThree.id, duration = 1000, date = dateNow, complete = false))
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.COLLECTOR.idTask)?.id).isEqualTo(userOne.id)
 
         /** Test choose the user with less work and only with properly skill **/
-        taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userOne.id, duration = 2000, date = dateNow))
+        taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userOne.id, duration = 2000, date = dateNow, complete = false))
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.COLLECTOR.idTask)?.id).isEqualTo(userThree.id)
 
         /** The workload is being filtering properly by date **/
         val dateTomorrow = Calendar.getInstance()
         dateTomorrow.add(Calendar.DAY_OF_YEAR, 1)
 
-        taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userThree.id, duration = 5000, date = dateTomorrow))
+        taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userThree.id, duration = 5000, date = dateTomorrow, complete = false))
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.COLLECTOR.idTask)?.id).isEqualTo(userThree.id)
     }
 

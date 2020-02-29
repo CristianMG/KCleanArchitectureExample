@@ -13,18 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.core.platform
+package com.fernandocejas.sample.features.technical
 
 import android.content.Context
-import com.fernandocejas.sample.core.extension.networkInfo
-import javax.inject.Inject
-import javax.inject.Singleton
+import android.content.Intent
+import android.os.Bundle
+import com.fernandocejas.sample.R
+import com.fernandocejas.sample.core.platform.BaseActivity
+import com.fernandocejas.sample.core.platform.ContentActivity
 
-/**
- * Injectable class which returns information about the network connection state.
- */
-@Singleton
-class NetworkHandler
-@Inject constructor(private val context: Context) {
-    val isConnected get() = context.networkInfo?.isConnectedOrConnecting
+class TechnicalActivity : ContentActivity() {
+
+    companion object {
+        fun callingIntent(context: Context) = Intent(context, TechnicalActivity::class.java)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setTitle(R.string.task_list)
+    }
+    override fun fragment() = TechnicalFragment()
 }

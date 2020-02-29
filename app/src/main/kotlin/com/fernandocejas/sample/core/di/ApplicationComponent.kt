@@ -20,6 +20,7 @@ import com.fernandocejas.sample.core.di.viewmodel.ViewModelModule
 import com.fernandocejas.sample.core.navigation.RouteActivity
 import com.fernandocejas.sample.features.admin.AdminFragment
 import com.fernandocejas.sample.features.login.LoginFragment
+import com.fernandocejas.sample.features.technical.TechnicalFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -31,4 +32,5 @@ interface ApplicationComponent {
 
     fun inject(loginFragment: LoginFragment)
     fun inject(adminFragment: AdminFragment)
+    fun inject(technicalFragment: TechnicalFragment)
 }

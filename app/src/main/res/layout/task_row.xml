@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/ivTask"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif"
+        android:maxLines="2"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivTask"
+        app:layout_constraintEnd_toStartOf="@+id/mbAction"
+        app:layout_constraintStart_toEndOf="@+id/ivTask"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="fdsajnjnkfdsnjkdfjnksfjknsdjknfjknsdjknfjnksdfjnksdfjknsdjknfjnksdfjkn" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbAction"
+        style="@style/KCleanArchitecture.Buttons.BlueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingStart="5dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="0dp"
+        android:textColor="@color/white"
+        app:cornerRadius="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="@color/grey_input"
+        tools:text="Completada" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

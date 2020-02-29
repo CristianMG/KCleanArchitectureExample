@@ -16,6 +16,10 @@
 package com.fernandocejas.sample.core.functional
 
 import com.fernandocejas.sample.core.exception.Failure
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import timber.log.Timber
 
 /**
  * Represents a value of one of two possible types (a disjoint union).
@@ -77,6 +81,7 @@ sealed class Either<out L, out R> {
             return try {
                 Right(function())
             } catch (e: Exception) {
+                Timber.e(e, "Error wrap function either")
                 Left(Failure.MappingError(e))
             }
         }
@@ -84,7 +89,6 @@ sealed class Either<out L, out R> {
 
     }
 }
-
 
 
 /**

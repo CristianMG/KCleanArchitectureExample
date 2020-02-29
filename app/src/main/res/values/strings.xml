@@ -34,4 +34,10 @@
     <string name="new_task_again">Crear otra tarea</string>
     <string name="close_session">Cerrar sesion</string>
     <string name="the_task_cannot_be_assign_to_user">No hay un tecnico disponible</string>
+    <string name="unknown_error">Error desconocido</string>
+    <string name="the_user_doesnt_have_task">El usuario no tienen tareas </string>
+    <string name="content_description">content description</string>
+    <string name="complete">Completada</string>
+    <string name="to_complete">Completar</string>
+    <string name="task_list">Lista de tareas</string>
 </resources>

@@ -65,8 +65,8 @@ class LoginFragment : BaseFragment(), Validator.ValidationListener {
     //TODO IMPORTANT hardcoded login to test
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel.email.set("ruben.garcia@gmail.com")
-        loginViewModel.password.set("12345")
+        loginViewModel.email.set("sarah.lopez@gmail.com")
+        loginViewModel.password.set("1234567")
     }
 
     private fun handleLoginSuccessful(user: User?) {

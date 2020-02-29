@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.fernandocejas.sample.domain.model.TypeTask
 import com.fernandocejas.sample.domain.model.User
 import com.fernandocejas.sample.domain.model.UserRole
 import com.google.gson.annotations.SerializedName
@@ -37,7 +38,7 @@ data class UserEntity(
 
         @SerializedName("typeTaskAvailable")
         @ColumnInfo(name = "typeTaskAvailable")
-        val typeTaskAvailabe: List<Int>
+        val typeTaskAvailable: List<Int>
 
 ) {
 
@@ -46,7 +47,7 @@ data class UserEntity(
      * @return User
      */
     fun toUserModel(): User =
-            User(id, email, password, name, if (role == ROLE_ADMIN) UserRole.ROLE_ADMIN else UserRole.ROLE_TECHNICAL)
+            User(id, email, password, name, if (role == ROLE_ADMIN) UserRole.ROLE_ADMIN else UserRole.ROLE_TECHNICAL, TypeTask.getTasksFromInt(typeTaskAvailable))
 
 
     companion object {

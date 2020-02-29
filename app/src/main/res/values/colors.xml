@@ -3,7 +3,9 @@
     <!--Base colors-->
     <color name="colorPrimary">#000000</color>
     <color name="colorAccent">#000000</color>
+    <color name="black">#000000</color>
     <color name="grey_input">#E2DEDE</color>
+    <color name="grey">#858585</color>
     <color name="colorSecondary">@color/kcleanArchitecture_blue</color>
     <color name="colorTextPrimary">#FFFFFF</color>
     <color name="colorTextSecondary">#7f1a18</color>

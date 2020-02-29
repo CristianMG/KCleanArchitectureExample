@@ -20,6 +20,7 @@ import com.fernandocejas.sample.domain.Authenticator
 import com.fernandocejas.sample.domain.model.UserRole
 import com.fernandocejas.sample.features.admin.AdminActivity
 import com.fernandocejas.sample.features.login.LoginActivity
+import com.fernandocejas.sample.features.technical.TechnicalActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -48,6 +49,7 @@ class Navigator
     }
 
     private fun showTechnicalScreen(context: Context) {
+        context.startActivity(TechnicalActivity.callingIntent(context))
 
     }
 

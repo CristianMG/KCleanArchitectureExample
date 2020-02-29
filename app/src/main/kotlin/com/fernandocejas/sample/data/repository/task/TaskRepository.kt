@@ -19,27 +19,47 @@ import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.functional.Either
 import com.fernandocejas.sample.data.AppDatabase
 import com.fernandocejas.sample.data.entity.TaskEntity
-import com.fernandocejas.sample.data.repository.mapping.DateFormat
 import com.fernandocejas.sample.domain.model.Task
 import com.fernandocejas.sample.domain.model.User
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 interface TaskRepository {
 
     fun task(): Either<Failure, List<Task>>
     fun insertTaskToUser(task: Task, user: User): Either<Failure, Unit>
+    fun observeTaskUserChange(userId: String): Flow<Either<Failure, List<Task>>>
+    fun completeTask(task: Task): Either<Failure, Unit>
 
     class Disk @Inject constructor(
-            private val appDatabase: AppDatabase,
-            private val dateFormat: DateFormat) : TaskRepository {
+            private val appDatabase: AppDatabase) : TaskRepository {
 
         private val cache: TaskDao get() = appDatabase.taskDAO()
 
         override fun task(): Either<Failure, List<Task>> = Either.wrapFunction { cache.getAll().map { it.toTaskModel() } }
 
         override fun insertTaskToUser(task: Task, user: User) = Either.wrapFunction {
-            cache.insert(TaskEntity(task.id, task.typeTask.idTask, user.id, task.secondsToComplete, task.date))
+            cache.insert(TaskEntity(task.id, task.typeTask.idTask, task.description, user.id, task.secondsToComplete, task.date, false))
         }
+
+        override fun completeTask(task: Task): Either<Failure, Unit> =
+                Either.wrapFunction {
+                    cache.updateTask(TaskEntity(task.id, task.typeTask.idTask, task.description, task.userId, task.secondsToComplete, task.date, true))
+                }
+
+        /**
+         * One of them is deprecated and another is Experimental O_O
+         */
+        @ExperimentalCoroutinesApi
+        override fun observeTaskUserChange(userId: String): Flow<Either<Failure, List<Task>>> {
+            return cache.getTaskByUserUntilChanged(userId)
+                    .map { list -> Either.wrapFunction { list.map { it.toTaskModel() } } }
+                    .catch { Either.Left(it) }
+        }
+
     }
 
 }

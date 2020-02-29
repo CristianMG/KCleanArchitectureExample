@@ -13,6 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.core.extension
+package com.fernandocejas.sample.domain
 
-fun String.Companion.empty() = ""
+import com.fernandocejas.sample.core.exception.Failure
+import com.fernandocejas.sample.core.functional.Either
+import com.fernandocejas.sample.data.repository.task.TaskRepository
+import com.fernandocejas.sample.domain.model.Task
+import javax.inject.Inject
+
+class CompleteTaskCase
+@Inject constructor(
+        private val taskRepository: TaskRepository) : UseCase<Unit, CompleteTaskCase.Params>() {
+
+    override suspend fun run(params: Params):Either<Failure,Unit> =
+            taskRepository.completeTask(params.task)
+
+
+    data class Params(val task: Task)
+}
