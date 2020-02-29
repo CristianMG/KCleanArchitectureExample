@@ -15,6 +15,8 @@
  */
 package com.fernandocejas.sample.domain
 
+import com.fernandocejas.sample.core.exception.Failure
+import com.fernandocejas.sample.core.functional.Either
 import com.fernandocejas.sample.core.functional.flatMap
 import com.fernandocejas.sample.core.interactor.UseCase
 import com.fernandocejas.sample.data.repository.task.TaskRepository
@@ -27,12 +29,13 @@ import javax.inject.Inject
 class AssignTaskLessWorkloadTechnical
 @Inject constructor(
         private val userRepository: UserRepository,
-        private val taskRepository: TaskRepository) : UseCase<Unit, AssignTaskLessWorkloadTechnical.Params>() {
+        private val taskRepository: TaskRepository) : UseCase<User, AssignTaskLessWorkloadTechnical.Params>() {
 
-    override suspend fun run(params: Params) =
+    override suspend fun run(params: Params):Either<Failure,User> =
             userRepository.getUserBySkillLessWorkloadToday(params.task.date, params.task.typeTask)
-                    .flatMap {
-                        taskRepository.insertTaskToUser(params.task, it)
+                    .flatMap {user->
+                        taskRepository.insertTaskToUser(params.task, user)
+                                .flatMap { Either.wrapFunction { user } }
                     }
 
     data class Params(val task: Task)

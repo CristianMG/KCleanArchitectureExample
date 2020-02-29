@@ -62,11 +62,14 @@ abstract class AppDatabase : RoomDatabase() {
                          */
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             GlobalScope.launch {
-                                SampleData.getSampleData(context).forEach {
-                                    getInstance(context).userDAO().insert(it)
+                                getInstance(context).runInTransaction {
+                                    SampleData.getSampleData(context).forEach {
+                                        getInstance(context).userDAO().insert(it)
+                                    }
                                 }
                             }
                         }
+
                     })
                     .build()
         }

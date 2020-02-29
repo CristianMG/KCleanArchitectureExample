@@ -40,11 +40,15 @@ interface UserDao {
 
     @Query("""
         SELECT * FROM user WHERE user.id =(
-        SELECT userID FROM (
-        SELECT task.user_id as userID, SUM(task.duration) as amount FROM task WHERE task.date = :date GROUP BY task.user_id HAVING instr(task.type_task,:skill) ORDER BY task.duration ASC LIMIT 1)
-        )
-    """)
+        SELECT userID FROM(
+        
+        SELECT user.id as userID,
+            (SELECT SUM(task.duration) from task WHERE task.date=:date AND task.user_id = user.id) AS total 
+             FROM user
+             WHERE instr(user.typeTaskAvailable,:skill) AND user.role = ${UserEntity.ROLE_TECHNICAL}) ORDER BY total ASC LIMIT 1
+        ) 
+     
+                 """)
     fun getUserBySkillLessWorkloadToday(date: Calendar, skill: Int): UserEntity?
-
 
 }

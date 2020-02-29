@@ -31,6 +31,7 @@ import com.fernandocejas.sample.core.navigation.Navigator
 import com.fernandocejas.sample.databinding.FragmentAdminBinding
 import javax.inject.Inject
 import androidx.appcompat.app.AlertDialog
+import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.extension.observe
 import com.fernandocejas.sample.domain.model.TypeTask
 
@@ -48,6 +49,13 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         viewModel = viewModel(viewModelFactory) {
+            observe(failure) {
+                if (it is Failure.UserNotFound) {
+                    notify(R.string.the_task_cannot_be_assign_to_user)
+                } else {
+                    notify(R.string.failure_server_error)
+                }
+            }
             observe(typeNotSelectionError) {
                 if (it == true)
                     notify(R.string.type_task_is_required)
@@ -57,15 +65,15 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
                 context?.let { ctx ->
                     AlertDialog.Builder(ctx)
                             .setTitle(R.string.new_task)
-                            .setMessage(R.string.new_task_was_added)
+                            .setMessage(getString(R.string.new_task_was_added, it?.name ?: ""))
                             .setPositiveButton(R.string.new_task_again
                             ) { _, _ ->
                                 viewModel.newTaskAgain()
                             }
                             .setNegativeButton(R.string.close_session
                             ) { _, _ ->
-                                    viewModel.closeSession()
-                                    navigator.showLogin(ctx)
+                                viewModel.closeSession()
+                                navigator.showLogin(ctx)
                                 // User cancelled the dialog
                             }.create().show()
 

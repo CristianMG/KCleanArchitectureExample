@@ -1,6 +1,7 @@
 package com.fernandocejas.sample.data
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import com.fernandocejas.sample.core.extension.loadJSONFromAsset
 import com.fernandocejas.sample.data.entity.UserEntity
 import com.fernandocejas.sample.domain.model.TypeTask
@@ -14,7 +15,7 @@ class SampleData {
 
         fun getSampleData(context: Context): List<UserEntity> {
             val turnsType = object : TypeToken<List<UserEntity>>() {}.type
-            return Gson().fromJson<List<UserEntity>>(context.loadJSONFromAsset("UserSampleData.json"), turnsType)
+            return Gson().fromJson(context.loadJSONFromAsset("UserSampleData.json"), turnsType)
         }
 
 
@@ -24,8 +25,9 @@ class SampleData {
         }
 
 
-        fun getUser(taskAvailable: List<TypeTask>, role: Int): UserEntity =
-                UserEntity(UUID.randomUUID().toString(), "example@example.com", "example", "example", role, taskAvailable.map { it.idTask })
+        @VisibleForTesting
+        fun getUser(uuid:String = UUID.randomUUID().toString(),taskAvailable: List<TypeTask>, role: Int): UserEntity =
+                UserEntity(uuid, "example@example.com", "example", "example", role, taskAvailable.map { it.idTask })
 
 
     }

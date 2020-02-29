@@ -1,9 +1,9 @@
 package com.fernandocejas.sample.data.repository
 
-
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import assertk.assertions.isNotNull
 import assertk.assertions.isNull
 import com.fernandocejas.sample.data.SampleData
 import com.fernandocejas.sample.data.entity.TaskEntity
@@ -13,7 +13,6 @@ import com.fernandocejas.sample.data.repository.user.UserDao
 import com.fernandocejas.sample.domain.model.TypeTask
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -63,14 +62,10 @@ class UserDaoTest : DatabaseTest() {
 
     @Test
     fun getUserBySkillLessWorkloadTodayTest() {
-        /**
-         * Prepare the state
-         */
-
-        val userOne = SampleData.getUser(mutableListOf(TypeTask.WRAPPER, TypeTask.COLLECTOR), UserEntity.ROLE_TECHNICAL)
-        val userTwo = SampleData.getUser(mutableListOf(TypeTask.WRAPPER), UserEntity.ROLE_TECHNICAL)
-        val userThree = SampleData.getUser(mutableListOf(TypeTask.COLLECTOR), UserEntity.ROLE_TECHNICAL)
-        val userFour = SampleData.getUser(mutableListOf(), UserEntity.ROLE_ADMIN)
+        val userOne = SampleData.getUser("465c120a-148f-457f-9082-4408e499ff2f", mutableListOf(TypeTask.WRAPPER, TypeTask.COLLECTOR), UserEntity.ROLE_TECHNICAL)
+        val userTwo = SampleData.getUser("fc2ce8fa-d168-4ced-851f-bd7dfcc1c6d3", mutableListOf(TypeTask.WRAPPER), UserEntity.ROLE_TECHNICAL)
+        val userThree = SampleData.getUser("dd047be2-3731-44cd-ac2d-45e11badf842", mutableListOf(TypeTask.COLLECTOR), UserEntity.ROLE_TECHNICAL)
+        val userFour = SampleData.getUser("c3991a08-22b5-4926-aa81-faccf20138b4", mutableListOf(), UserEntity.ROLE_ADMIN)
 
         userDao.insert(userOne)
         userDao.insert(userTwo)
@@ -79,9 +74,12 @@ class UserDaoTest : DatabaseTest() {
 
         val dateNow = Calendar.getInstance()
 
-        /** Any user can do the work **/
+        /**
+         * We has user with properly skills or not
+         */
+        assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.COLLECTOR.idTask)).isNotNull()
+        assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.WRAPPER.idTask)).isNotNull()
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.PRODUCT_SUPPLIER.idTask)).isNull()
-
 
         /** Test choose the user with less work load **/
         taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userOne.id, duration = 30, date = dateNow))
@@ -93,14 +91,14 @@ class UserDaoTest : DatabaseTest() {
         taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userOne.id, duration = 2000, date = dateNow))
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.COLLECTOR.idTask)?.id).isEqualTo(userThree.id)
 
-
         /** The workload is being filtering properly by date **/
         val dateTomorrow = Calendar.getInstance()
         dateTomorrow.add(Calendar.DAY_OF_YEAR, 1)
 
         taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userThree.id, duration = 5000, date = dateTomorrow))
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.COLLECTOR.idTask)?.id).isEqualTo(userThree.id)
-
     }
+
+
 }
 

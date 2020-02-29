@@ -24,7 +24,7 @@ ext {
     javaxInject_version = '1'
     retrofit_version = '2.3.0'
     okhttp_logging_interceptor_version = '3.8.1'
-
+    debug_database_version = '1.0.6'
     //Unit Testing
     robolectric_version = '3.8'
     junit_version = '4.12'
@@ -62,7 +62,8 @@ ext {
             room                    : "androidx.room:room-runtime:$room_version",
             room_compiler           : "androidx.room:room-compiler:$room_version",
             room_coroutines         : "androidx.room:room-coroutines:$room_coroutines",
-            data_binding_validator  : "com.github.Ilhasoft:data-binding-validator:$data_binding_validator"
+            data_binding_validator  : "com.github.Ilhasoft:data-binding-validator:$data_binding_validator",
+            debug_database          : "com.amitshekhar.android:debug-db:$debug_database_version"
     ]
 
     unitTesting = [

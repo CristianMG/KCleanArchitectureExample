@@ -105,6 +105,7 @@ dependencies {
     kapt applicationDependencies.room_compiler
     implementation applicationDependencies.room_coroutines
     implementation applicationDependencies.data_binding_validator
+    debugImplementation applicationDependencies.debug_database
 
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.kotlin

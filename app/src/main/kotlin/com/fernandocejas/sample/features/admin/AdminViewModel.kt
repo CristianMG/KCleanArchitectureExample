@@ -7,6 +7,7 @@ import com.fernandocejas.sample.domain.AssignTaskLessWorkloadTechnical
 import com.fernandocejas.sample.domain.Authenticator
 import com.fernandocejas.sample.domain.model.Task
 import com.fernandocejas.sample.domain.model.TypeTask
+import com.fernandocejas.sample.domain.model.User
 import java.util.*
 import javax.inject.Inject
 
@@ -26,8 +27,8 @@ class AdminViewModel @Inject constructor(
     private var _typeNotSelectionError: MutableLiveData<Boolean> = MutableLiveData()
     var typeNotSelectionError: LiveData<Boolean> = _typeNotSelectionError
 
-    private var _taskAddSuccessful: MutableLiveData<Boolean> = MutableLiveData()
-    var taskAddSuccessful: LiveData<Boolean> = _taskAddSuccessful
+    private var _taskAddSuccessful: MutableLiveData<User> = MutableLiveData()
+    var taskAddSuccessful: LiveData<User> = _taskAddSuccessful
 
 
     fun newTask() {
@@ -42,8 +43,8 @@ class AdminViewModel @Inject constructor(
     }
 
 
-    private fun handleSuccessful(unit: Unit) {
-        _taskAddSuccessful.value = true
+    private fun handleSuccessful(user: User) {
+        _taskAddSuccessful.value = user
     }
 
     fun newTaskAgain() {
