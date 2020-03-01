@@ -18,6 +18,8 @@ package com.fernandocejas.sample.core.di.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fernandocejas.sample.features.admin.AdminViewModel
+import com.fernandocejas.sample.features.farm.FarmViewHolder
+import com.fernandocejas.sample.features.farm.FarmViewModel
 import com.fernandocejas.sample.features.login.LoginViewModel
 import com.fernandocejas.sample.features.technical.TechnicalViewModel
 import dagger.Binds
@@ -44,5 +46,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TechnicalViewModel::class)
     abstract fun bindsTechnicalViewModel(technicalViewModel: TechnicalViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FarmViewModel::class)
+    abstract fun bindsFarmViewModel(farmViewModel: FarmViewModel): ViewModel
 
 }

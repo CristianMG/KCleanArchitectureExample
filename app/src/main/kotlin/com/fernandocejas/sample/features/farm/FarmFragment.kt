@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.features.technical
+package com.fernandocejas.sample.features.farm
 
 import android.content.Context
 import android.os.Bundle
@@ -25,15 +25,14 @@ import com.fernandocejas.sample.core.extension.viewModel
 import com.fernandocejas.sample.core.imageloader.ImageLoader
 import com.fernandocejas.sample.core.navigation.Navigator
 import com.fernandocejas.sample.core.platform.BaseFragment
+import com.fernandocejas.sample.domain.model.Farm
 import com.fernandocejas.sample.domain.model.Task
+import com.fernandocejas.sample.domain.model.User
 import kotlinx.android.synthetic.main.fragment_technical.*
 import javax.inject.Inject
-import android.view.MenuInflater
-import android.view.Menu
-import android.view.MenuItem
 
 
-class TechnicalFragment : BaseFragment() {
+class FarmFragment : BaseFragment() {
 
     @Inject
     lateinit var navigator: Navigator
@@ -44,60 +43,33 @@ class TechnicalFragment : BaseFragment() {
     @Inject
     lateinit var imageLoader: ImageLoader
 
-    private val adapter: TaskAdapter by lazy {
-        TaskAdapter(appContext, imageLoader) {
-            viewModel.completeTask(it)
-        }
+    private val adapter: FarmAdapter by lazy {
+        FarmAdapter(appContext, imageLoader) {}
     }
 
-    private lateinit var viewModel: TechnicalViewModel
+    private lateinit var viewModel: FarmViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
         appComponent.inject(this)
         viewModel = viewModel(viewModelFactory) {
             observe(failure) {
                 notify(R.string.unknown_error)
             }
-            observe(taskUsers) {
-                it?.let { handleNewTaskUser(it) }
+
+            observe(farmsDataSource){
+                adapter.submitList(it)
             }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.observeMyTask()
         rvList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvList.adapter = adapter
+        viewModel.updateFarms()
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.technical_menu_fragment, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        super.onOptionsItemSelected(item)
-        when (item.itemId) {
-            R.id.goToFarms -> context?.let { navigator.showFarms(it) }
-        }
-        return true
-    }
-
-    private fun handleNewTaskUser(list: List<Task>) {
-        if (list.isNotEmpty()) {
-            rvList.visibility = View.VISIBLE
-            flPlaceholderNoUsers.visibility = View.GONE
-            adapter.setData(list)
-        } else {
-            rvList.visibility = View.GONE
-            flPlaceholderNoUsers.visibility = View.VISIBLE
-        }
-    }
-
-    override fun layoutId() = R.layout.fragment_technical
+    override fun layoutId() = R.layout.fragment_farm
 
 }

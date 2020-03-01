@@ -19,6 +19,7 @@ import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.core.di.viewmodel.ViewModelModule
 import com.fernandocejas.sample.core.navigation.RouteActivity
 import com.fernandocejas.sample.features.admin.AdminFragment
+import com.fernandocejas.sample.features.farm.FarmFragment
 import com.fernandocejas.sample.features.login.LoginFragment
 import com.fernandocejas.sample.features.technical.TechnicalFragment
 import dagger.Component
@@ -33,4 +34,5 @@ interface ApplicationComponent {
     fun inject(loginFragment: LoginFragment)
     fun inject(adminFragment: AdminFragment)
     fun inject(technicalFragment: TechnicalFragment)
+    fun inject(farmFragment: FarmFragment)
 }

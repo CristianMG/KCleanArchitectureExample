@@ -24,3 +24,8 @@ fun Context.loadJSONFromAsset(filename: String): String? {
     }
     return json
 }
+
+
+val Context.networkInfo: NetworkInfo? get() =
+    (this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
+

@@ -19,10 +19,13 @@ import android.content.Context
 import androidx.loader.content.Loader
 import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.BuildConfig
+import com.fernandocejas.sample.core.di.qualifiers.Cloud
+import com.fernandocejas.sample.core.di.qualifiers.Disk
 import com.fernandocejas.sample.core.imageloader.GlideLoader
 import com.fernandocejas.sample.core.imageloader.ImageLoader
 import com.fernandocejas.sample.core.imageloader.LoaderEngine
 import com.fernandocejas.sample.data.AppDatabase
+import com.fernandocejas.sample.data.repository.farm.FarmRepository
 import com.fernandocejas.sample.data.repository.mapping.DateFormat
 import com.fernandocejas.sample.data.repository.task.TaskRepository
 import com.fernandocejas.sample.data.repository.user.SessionRepository
@@ -46,7 +49,7 @@ class ApplicationModule(private val application: AndroidApplication) {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("https://raw.githubusercontent.com/android10/Sample-Data/master/Android-CleanArchitecture-Kotlin/")
+                .baseUrl("http://data.ct.gov")
                 .client(createClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -55,7 +58,7 @@ class ApplicationModule(private val application: AndroidApplication) {
     private fun createClient(): OkHttpClient {
         val okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             okHttpClientBuilder.addInterceptor(loggingInterceptor)
         }
         return okHttpClientBuilder.build()
@@ -90,4 +93,14 @@ class ApplicationModule(private val application: AndroidApplication) {
     @Provides
     @Singleton
     fun providesSessionRepository(dataSource: SessionRepository.Disk): SessionRepository = dataSource
+
+    @Provides
+    @Singleton
+    @Disk
+    fun provideFarmRepositoryDisk(dataSource: FarmRepository.Disk): FarmRepository = dataSource
+
+    @Provides
+    @Singleton
+    @Cloud
+    fun provideFarmRepositoryNetwork(dataSource: FarmRepository.Network): FarmRepository = dataSource
 }

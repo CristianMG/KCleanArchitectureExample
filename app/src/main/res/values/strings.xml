@@ -40,4 +40,9 @@
     <string name="complete">Completada</string>
     <string name="to_complete">Completar</string>
     <string name="task_list">Lista de tareas</string>
+    <string name="category">Categoria:</string>
+    <string name="item">Producto:</string>
+    <string name="zip_code">Codigo postal:</string>
+    <string name="phone">Teléfono</string>
+    <string name="farms">Granjas</string>
 </resources>

@@ -23,9 +23,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.fernandocejas.sample.core.extension.loadJSONFromAsset
+import com.fernandocejas.sample.data.entity.FarmEntity
 import com.fernandocejas.sample.data.entity.TaskEntity
 import com.fernandocejas.sample.data.entity.UserEntity
 import com.fernandocejas.sample.data.repository.Converters
+import com.fernandocejas.sample.data.repository.farm.FarmDao
 import com.fernandocejas.sample.data.repository.task.TaskDao
 import com.fernandocejas.sample.data.repository.user.UserDao
 import com.google.gson.Gson
@@ -33,12 +35,13 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [UserEntity::class, TaskEntity::class], version = 1, exportSchema = false)
+@Database(entities = [UserEntity::class, TaskEntity::class, FarmEntity::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDAO(): UserDao
     abstract fun taskDAO(): TaskDao
+    abstract fun farmDAO(): FarmDao
 
     companion object {
 

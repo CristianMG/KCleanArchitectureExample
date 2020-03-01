@@ -19,6 +19,7 @@ import android.content.Context
 import com.fernandocejas.sample.domain.Authenticator
 import com.fernandocejas.sample.domain.model.UserRole
 import com.fernandocejas.sample.features.admin.AdminActivity
+import com.fernandocejas.sample.features.farm.FarmActivity
 import com.fernandocejas.sample.features.login.LoginActivity
 import com.fernandocejas.sample.features.technical.TechnicalActivity
 import javax.inject.Inject
@@ -48,6 +49,10 @@ class Navigator
         }
     }
 
+    fun showFarms(context: Context) {
+        context.startActivity(FarmActivity.callingIntent(context))
+    }
+
     private fun showTechnicalScreen(context: Context) {
         context.startActivity(TechnicalActivity.callingIntent(context))
 
@@ -56,4 +61,5 @@ class Navigator
     private fun showAdminScreen(context: Context) {
         context.startActivity(AdminActivity.callingIntent(context))
     }
+
 }

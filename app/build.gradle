@@ -108,7 +108,8 @@ dependencies {
     implementation applicationDependencies.data_binding_validator
     implementation applicationDependencies.ktx_viewmodel
     implementation applicationDependencies.timber
-
+    implementation applicationDependencies.paging_library_runtime
+    implementation applicationDependencies.paging_library_ktx
     debugImplementation applicationDependencies.debug_database
 
     //Unit/Integration tests dependencies
