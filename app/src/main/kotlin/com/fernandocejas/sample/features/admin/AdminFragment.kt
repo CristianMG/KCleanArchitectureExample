@@ -18,9 +18,7 @@ package com.fernandocejas.sample.features.admin
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.fernandocejas.sample.core.platform.BaseFragment
 
 import androidx.databinding.DataBindingUtil
@@ -47,6 +45,7 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         appComponent.inject(this)
         viewModel = viewModel(viewModelFactory) {
             observe(failure) {
@@ -92,6 +91,21 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
         validator.setValidationListener(this)
         return binding.root
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.admin_menu_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        super.onOptionsItemSelected(item)
+        when (item.itemId) {
+            R.id.goToFarms -> context?.let { navigator.showFarms(it) }
+        }
+        return true
+    }
+
 
 
     override fun layoutId() = R.layout.fragment_admin
