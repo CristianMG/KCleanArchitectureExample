@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.test.core.app.ApplicationProvider
+import com.fernandocejas.sample.BuildConfig
 import com.fernandocejas.sample.data.AppDatabase
-import com.fernandocejas.sample.test.BuildConfig
 import org.junit.After
 import org.junit.Before
 
