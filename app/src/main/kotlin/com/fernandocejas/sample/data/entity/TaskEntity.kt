@@ -33,7 +33,7 @@ data class TaskEntity(
         @ColumnInfo(name = "date")
         val date: String,
         @ColumnInfo(name = "complete")
-        val complete: Boolean
+        var complete: Boolean
 ) {
 
     /**
@@ -41,7 +41,7 @@ data class TaskEntity(
      * @return User
      */
     fun toTaskModel(dateFormat: DateFormat): Task =
-            Task(id, parseTypetask(), userId, description, duration, dateFormat.parseCalendarToDatabaseFormat(date), complete)
+            Task(id, parseTypetask(), userId, description, duration, dateFormat.parseDatabaseFormatToCalendar(date), complete)
 
     /**
      * Disregarded parser only add new items to TypeTask enum

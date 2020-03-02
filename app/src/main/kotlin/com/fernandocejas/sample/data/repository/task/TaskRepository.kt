@@ -19,6 +19,7 @@ import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.functional.Either
 import com.fernandocejas.sample.data.AppDatabase
 import com.fernandocejas.sample.data.entity.TaskEntity
+import com.fernandocejas.sample.data.repository.mapping.DateFormat
 import com.fernandocejas.sample.domain.model.Task
 import com.fernandocejas.sample.domain.model.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -35,19 +36,20 @@ interface TaskRepository {
     fun completeTask(task: Task): Either<Failure, Unit>
 
     class Disk @Inject constructor(
+            private val dateFormat: DateFormat,
             private val appDatabase: AppDatabase) : TaskRepository {
 
         private val cache: TaskDao get() = appDatabase.taskDAO()
 
-        override fun task(): Either<Failure, List<Task>> = Either.wrapFunction { cache.getAll().map { it.toTaskModel() } }
+        override fun task(): Either<Failure, List<Task>> = Either.wrapFunction { cache.getAll().map { it.toTaskModel(dateFormat) } }
 
         override fun insertTaskToUser(task: Task, user: User) = Either.wrapFunction {
-            cache.insert(TaskEntity(task.id, task.typeTask.idTask, task.description, user.id, task.secondsToComplete, task.date, false))
+            cache.insert(TaskEntity(task.id, task.typeTask.idTask, task.description, user.id, task.secondsToComplete, dateFormat.parseCalendarToDatabaseFormat(task.date), false))
         }
 
         override fun completeTask(task: Task): Either<Failure, Unit> =
                 Either.wrapFunction {
-                    cache.updateTask(TaskEntity(task.id, task.typeTask.idTask, task.description, task.userId, task.secondsToComplete, task.date, true))
+                    cache.updateTask(TaskEntity(task.id, task.typeTask.idTask, task.description, task.userId, task.secondsToComplete,  dateFormat.parseCalendarToDatabaseFormat(task.date), true))
                 }
 
         /**
@@ -56,7 +58,7 @@ interface TaskRepository {
         @ExperimentalCoroutinesApi
         override fun observeTaskUserChange(userId: String): Flow<Either<Failure, List<Task>>> {
             return cache.getTaskByUserUntilChanged(userId)
-                    .map { list -> Either.wrapFunction { list.map { it.toTaskModel() } } }
+                    .map { list -> Either.wrapFunction { list.map { it.toTaskModel(dateFormat) } } }
                     .catch { Either.Left(it) }
         }
 

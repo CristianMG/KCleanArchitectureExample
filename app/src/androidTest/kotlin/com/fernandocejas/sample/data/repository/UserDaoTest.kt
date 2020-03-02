@@ -22,7 +22,6 @@ class UserDaoTest : DatabaseTest() {
     private lateinit var userDao: UserDao
     private lateinit var taskDao: TaskDao
 
-
     override fun before() {
         super.before()
         userDao = db.userDAO()
@@ -72,7 +71,7 @@ class UserDaoTest : DatabaseTest() {
         userDao.insert(userThree)
         userDao.insert(userFour)
 
-        val dateNow = Calendar.getInstance()
+        val dateNow = dateFormat.parseCalendarToDatabaseFormat(Calendar.getInstance())
 
         /**
          * We has user with properly skills or not
@@ -92,8 +91,9 @@ class UserDaoTest : DatabaseTest() {
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.COLLECTOR.idTask)?.id).isEqualTo(userThree.id)
 
         /** The workload is being filtering properly by date **/
-        val dateTomorrow = Calendar.getInstance()
-        dateTomorrow.add(Calendar.DAY_OF_YEAR, 1)
+        val dateTomorrow = dateFormat.parseCalendarToDatabaseFormat(
+                Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, 1) }
+        )
 
         taskDao.insert(TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userThree.id, duration = 5000, date = dateTomorrow, complete = false))
         assertThat(userDao.getUserBySkillLessWorkloadToday(dateNow, TypeTask.COLLECTOR.idTask)?.id).isEqualTo(userThree.id)

@@ -49,4 +49,9 @@ interface TaskDao {
 
     @Update
     fun updateTask(task: TaskEntity)
+
+    @Query("""
+        SELECT * FROM task WHERE id = :id
+    """)
+    fun getById(id: String): TaskEntity?
 }

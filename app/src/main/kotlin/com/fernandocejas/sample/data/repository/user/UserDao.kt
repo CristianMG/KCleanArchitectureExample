@@ -49,6 +49,6 @@ interface UserDao {
         ) 
      
                  """)
-    fun getUserBySkillLessWorkloadToday(date: Calendar, skill: Int): UserEntity?
+    fun getUserBySkillLessWorkloadToday(date: String, skill: Int): UserEntity?
 
 }

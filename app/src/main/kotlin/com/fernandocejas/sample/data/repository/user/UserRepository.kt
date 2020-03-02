@@ -53,7 +53,7 @@ interface UserRepository {
         }
 
         override fun getUserBySkillLessWorkloadToday(calendar: Calendar, typeTask: TypeTask): Either<Failure, User> =
-                cache.getUserBySkillLessWorkloadToday(calendar, typeTask.idTask)
+                cache.getUserBySkillLessWorkloadToday( dateFormat.parseCalendarToDatabaseFormat(calendar), typeTask.idTask)
                         ?.toUserModel()
                         ?.let {
                              Either.Right(it)
