@@ -1,6 +1,6 @@
 # Android - Clean Architecture - Kotlin [![Build Status](https://app.bitrise.io/app/1850888644719f3c/status.svg?token=uHL6GqLkYovmnjzTPkr3Hw)]
 Project based on CleanAndroidArchitecture from Android 10 the target is update the project and modularized.
-All credit to original project.  This project is based on MVVM architecture and written with Kotlin.
+All credit to original project.  This project is based on MVVM architecture and written in Kotlin.
 
 
 # Targets
