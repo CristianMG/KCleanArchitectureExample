@@ -1,3 +1,22 @@
+/*
+ *
+ *  * Copyright 2020 Cristian Menárguez González
+ *  *
+ *  * Licensed under the Apache License, Version 2.0 (the "License");
+ *  * you may not use this file except in compliance with the License.
+ *  * You may obtain a copy of the License at
+ *  *
+ *  *    http://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
+ *
+ */
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -20,6 +39,10 @@ android {
 
     dataBinding {
         enabled = true
+    }
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
     }
 
     packagingOptions {
@@ -99,8 +122,14 @@ dependencies {
     implementation applicationDependencies.okhttpLoggingInterceptor
     implementation applicationDependencies.room
     kapt applicationDependencies.room_compiler
-    implementation applicationDependencies.room_coroutines
+    //implementation applicationDependencies.room_coroutines
+    implementation applicationDependencies.ktx_room
     implementation applicationDependencies.data_binding_validator
+    implementation applicationDependencies.ktx_viewmodel
+    implementation applicationDependencies.timber
+    implementation applicationDependencies.paging_library_runtime
+    implementation applicationDependencies.paging_library_ktx
+    debugImplementation applicationDependencies.debug_database
 
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.kotlin
@@ -116,8 +145,8 @@ dependencies {
     androidTestImplementation acceptanceTestDependencies.espressoCore
     androidTestImplementation acceptanceTestDependencies.espressoIntents
     androidTestImplementation acceptanceTestDependencies.androidAnnotations
-    androidTestImplementation acceptanceTestDependencies.assertk
-
+    androidTestImplementation acceptanceTestDependencies.coroutines_test
+    androidTestImplementation acceptanceTestDependencies.android_arch_core_testing
     //Development dependencies
     debugImplementation developmentDependencies.leakCanary
     releaseImplementation developmentDependencies.leakCanaryNoop

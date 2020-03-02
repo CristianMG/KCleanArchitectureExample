@@ -1,9 +1,31 @@
+<!--
+  ~ /*
+  ~  * Copyright 2020 Cristian Menárguez González
+  ~  *
+  ~  * Licensed under the Apache License, Version 2.0 (the "License");
+  ~  * you may not use this file except in compliance with the License.
+  ~  * You may obtain a copy of the License at
+  ~  *
+  ~  *    http://www.apache.org/licenses/LICENSE-2.0
+  ~  *
+  ~  * Unless required by applicable law or agreed to in writing, software
+  ~  * distributed under the License is distributed on an "AS IS" BASIS,
+  ~  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  * See the License for the specific language governing permissions and
+  ~  * limitations under the License.
+  ~  */
+  ~
+  -->
+
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/kcleanArchitecture_blue</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
@@ -25,8 +47,9 @@
     </style>
 
     <style name="BaseToolbarTheme">
-        <item name="android:textColorPrimary">@color/colorTextSecondary</item>
-        <item name="android:textColorSecondary">@color/colorTextPrimary</item>
+        <item name="android:background">@color/kcleanArchitecture_blue</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
 
     <style name="CustomTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
@@ -36,28 +59,54 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="MoviePoster">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:scaleType">centerCrop</item>
-        <item name="android:transitionName">@string/movie_transition_poster</item>
-        <item name="android:background">@color/colorPrimary</item>
+
+
+    <style name="KCleanArchitecture.Input.EditText" parent="@android:style/TextAppearance">
+        <item name="android:drawablePadding">15dp</item>
+        <item name="android:background">@color/white</item>
     </style>
 
-    <style name="MovieDetailsTitle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorTextSecondary</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:textSize">@dimen/movie_details_title</item>
-        <item name="android:paddingRight">20dp</item>
-        <item name="android:paddingLeft">20dp</item>
+    <!-- Use material button with this style>  -->
+    <style name="KCleanArchitecture.Input.EventInput" parent="@android:style/TextAppearance">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:textColor">@color/kcleanArchitecture_blue</item>
+        <item name="android:textSize">15sp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="rippleColor">@color/grey_input</item>
+        <item name="strokeColor">@color/kcleanArchitecture_blue</item>
+        <item name="strokeWidth">1dp</item>
     </style>
 
-    <style name="MovieDetailsText" parent="MovieDetailsTitle">
-        <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:textSize">@dimen/movie_details_text</item>
-        <item name="android:paddingBottom">25dp</item>
-        <item name="android:freezesText">true</item>
+
+    <style name="KCleanArchitecture.Buttons.ButtonGeneric" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:paddingStart">40dp</item>
+        <item name="android:paddingEnd">40dp</item>
+        <item name="android:paddingRight">40dp</item>
+        <item name="android:paddingLeft">40dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:letterSpacing" tools:targetApi="lollipop">0.09</item>
+        <item name="android:lineSpacingExtra">2.3sp</item>
+        <item name="android:lineHeight" tools:targetApi="p">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="cornerRadius">25dp</item>
     </style>
+
+    <style name="KCleanArchitecture.Buttons.BlueButton" parent="KCleanArchitecture.Buttons.ButtonGeneric">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/kcleanArchitecture_blue</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+
+
+
 
 </resources>
