@@ -1,6 +1,6 @@
 # Android - Clean Architecture - Kotlin [![Build Status](https://app.bitrise.io/app/1850888644719f3c/status.svg?token=uHL6GqLkYovmnjzTPkr3Hw)]
 Project based on CleanAndroidArchitecture from Android 10 the target is update the project and modularized.
-All credit to original project.  This project is based on MVVM architecture and written in Kotlin.
+All credit to original project.  This project is based on MVVM architecture and written with Kotlin.
 
 
 # Targets
@@ -13,14 +13,14 @@ Done
  - Instrumentation test
  - Bitrise as Integration server
 
-Not done
+Todo
+ - Better test's coverage
  - Modularized project
  - Espresso test interface
  - Fastlane
- - Better test's coverage
  - Firebase test labs
- - Change use case to new see https://github.com/google/iosched
- - Migrating from dagger to Koin
+ - Change "UseCase" to new see https://github.com/google/iosched
+ - Migrating from Dagger to Koin
  - Migrating from Mockito to Mockk
 
 # Third party libraries
@@ -45,21 +45,26 @@ Not done
  - Leak Canary
 
 # Users example
-    "email": "ruben.garcia@gmail.com"
-    "password": 12345
 
-    "email": "rafael.martin@gmail.com",
-    "password": 123456
+    email: ruben.garcia@gmail.com
+    password: 12345
+    Role: Admin
 
-    "email": "sarah.lopez@gmail.com",
-    "password": 1234567
+    email: rafael.martin@gmail.com,
+    password: 123456
+    Role: Technical
+    Skills: COLLECTOR
+
+    email: sarah.lopez@gmail.com,
+    password: 1234567
+    Role: Technical
+    Skills: PRODUCT_SUPPLIER,WRAPPER
 
 For add more user go to UserSampleData.json
 
 ## Based on # [Android - Clean Architecture - Kotlin](https://github.com/android10/Android-CleanArchitecture-Kotlin) :
 
 ## License
-
 
     /*
      *
