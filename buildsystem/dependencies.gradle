@@ -29,20 +29,18 @@ ext {
     robolectric_version = '3.8'
     junit_version = '4.12'
     mockito_version = '1.4.0'
-    kluent_version = '1.14'
+    kluent_version = '1.60'
 
     //Acceptance Testing
     runner_version = '1.0.2-alpha1'
-    espresso_version = '3.0.2-alpha1'
+    espresso_version = '3.1.0'
     assert_k_version = '0.21'
 
     //Development
     leakCanaryVersion = '1.5'
 
     ktx_version_view_model = '2.1.0-beta01'
-
     timber_version = '4.7.1'
-
     paging_version = '2.1.1'
 
     mainApplication = [
@@ -91,10 +89,12 @@ ext {
     acceptanceTesting = [
             testRunner        : "androidx.test.ext:junit:1.1.1",
             testRules         : "androidx.test:rules:1.1.0",
-            espressoCore      : "androidx.test.espresso:espresso-core:3.1.0",
-            espressoIntents   : "androidx.test.espresso:espresso-intents:3.1.0",
+            espressoCore      : "androidx.test.espresso:espresso-core:$espresso_version",
+            espressoIntents   : "androidx.test.espresso:espresso-intents:$espresso_version",
             androidAnnotations: "androidx.annotation:annotation:1.0.0",
-            assertk           : "com.willowtreeapps.assertk:assertk-jvm:$assert_k_version"
+            android_arch_core_testing : "androidx.arch.core:core-testing:2.0.0-alpha1",
+            assertk           : "com.willowtreeapps.assertk:assertk-jvm:$assert_k_version",
+            coroutines_test : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlin_coroutines_version"
     ]
 
     development = [

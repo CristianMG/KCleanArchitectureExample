@@ -127,7 +127,8 @@ dependencies {
     androidTestImplementation acceptanceTestDependencies.espressoIntents
     androidTestImplementation acceptanceTestDependencies.androidAnnotations
     androidTestImplementation acceptanceTestDependencies.assertk
-
+    androidTestImplementation acceptanceTestDependencies.coroutines_test
+    androidTestImplementation acceptanceTestDependencies.android_arch_core_testing
     //Development dependencies
     debugImplementation developmentDependencies.leakCanary
     releaseImplementation developmentDependencies.leakCanaryNoop

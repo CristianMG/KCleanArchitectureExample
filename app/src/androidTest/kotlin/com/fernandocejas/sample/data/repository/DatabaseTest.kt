@@ -1,6 +1,7 @@
 package com.fernandocejas.sample.data.repository
 
 import android.content.Context
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.test.core.app.ApplicationProvider
@@ -8,12 +9,16 @@ import com.fernandocejas.sample.BuildConfig
 import com.fernandocejas.sample.data.AppDatabase
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 
 open class DatabaseTest {
 
+    @get:Rule
+    val instantExecutorRule = InstantTaskExecutorRule()
+
     protected lateinit var db: AppDatabase
     protected lateinit var context: Context
-
+    
     @Before
     open fun before() {
         context = ApplicationProvider.getApplicationContext()

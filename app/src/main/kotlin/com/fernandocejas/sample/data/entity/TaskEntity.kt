@@ -1,9 +1,10 @@
 package com.fernandocejas.sample.data.entity
 
 import androidx.room.*
+import com.fernandocejas.sample.data.repository.mapping.DateFormat
 import com.fernandocejas.sample.domain.model.Task
 import com.fernandocejas.sample.domain.model.TypeTask
-import java.time.Duration
+
 import java.util.*
 
 
@@ -30,7 +31,7 @@ data class TaskEntity(
         @ColumnInfo(name = "duration")
         val duration: Int,
         @ColumnInfo(name = "date")
-        val date: Calendar,
+        val date: String,
         @ColumnInfo(name = "complete")
         val complete: Boolean
 ) {
@@ -39,8 +40,8 @@ data class TaskEntity(
      * To provide a good layer's separation
      * @return User
      */
-    fun toTaskModel(): Task =
-            Task(id, parseTypetask(), userId, description, duration, date, complete)
+    fun toTaskModel(dateFormat: DateFormat): Task =
+            Task(id, parseTypetask(), userId, description, duration, dateFormat.parseCalendarToDatabaseFormat(date), complete)
 
     /**
      * Disregarded parser only add new items to TypeTask enum
