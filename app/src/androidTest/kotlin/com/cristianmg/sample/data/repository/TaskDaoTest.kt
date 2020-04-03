@@ -25,8 +25,8 @@ import assertk.all
 import assertk.assertThat
 import assertk.assertions.*
 import com.cristianmg.sample.data.SampleData
-import com.cristianmg.sample.data.entity.TaskEntity
-import com.cristianmg.sample.data.entity.UserEntity
+import com.cristianmg.common_value_object.TaskEntity
+import com.cristianmg.common_value_object.UserEntity
 import com.cristianmg.sample.data.repository.task.TaskDao
 import com.cristianmg.sample.data.repository.user.UserDao
 import com.cristianmg.sample.domain.model.TypeTask

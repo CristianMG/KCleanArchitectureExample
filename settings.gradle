@@ -17,4 +17,8 @@
  *
  */
 
-include ':app'
+//include ':app'
+include ':repositories'
+include ':common_objects'
+include ':api'
+include ':database'

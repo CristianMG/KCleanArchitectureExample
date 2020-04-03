@@ -21,7 +21,7 @@ package com.cristianmg.sample.data.repository.farm
 
 import androidx.paging.DataSource
 import androidx.room.*
-import com.cristianmg.sample.data.entity.FarmEntity
+import com.cristianmg.common_value_object.FarmEntity
 
 @Dao
 interface FarmDao {

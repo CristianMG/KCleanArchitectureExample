@@ -22,13 +22,12 @@ package com.cristianmg.sample.data.repository.task
 import com.cristianmg.sample.core.exception.Failure
 import com.cristianmg.sample.core.functional.Either
 import com.cristianmg.sample.data.AppDatabase
-import com.cristianmg.sample.data.entity.TaskEntity
+import com.cristianmg.common_value_object.TaskEntity
 import com.cristianmg.sample.data.repository.mapping.DateFormat
 import com.cristianmg.sample.domain.model.Task
 import com.cristianmg.sample.domain.model.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 

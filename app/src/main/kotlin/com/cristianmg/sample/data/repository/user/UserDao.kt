@@ -20,7 +20,7 @@
 package com.cristianmg.sample.data.repository.user
 
 import androidx.room.*
-import com.cristianmg.sample.data.entity.UserEntity
+import com.cristianmg.common_value_object.UserEntity
 
 @Dao
 interface UserDao {

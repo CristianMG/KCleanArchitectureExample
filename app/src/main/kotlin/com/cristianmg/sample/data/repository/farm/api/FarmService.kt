@@ -19,6 +19,7 @@
 
 package com.cristianmg.sample.data.repository.farm.api
 
+import com.cristianmg.api.FarmApi
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton

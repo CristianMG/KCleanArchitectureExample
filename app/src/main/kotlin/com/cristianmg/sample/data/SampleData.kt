@@ -22,7 +22,7 @@ package com.cristianmg.sample.data
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import com.cristianmg.sample.core.extension.loadJSONFromAsset
-import com.cristianmg.sample.data.entity.UserEntity
+import com.cristianmg.common_value_object.UserEntity
 import com.cristianmg.sample.domain.model.TypeTask
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

@@ -14,12 +14,13 @@ Done
  - Bitrise as Integration server
 
 Todo
+ - Coroutines cancelation (see https://medium.com/androiddevelopers/cancellation-in-coroutines-aa6b90163629)
  - Better test's coverage
  - Modularized project
  - Espresso test interface
  - Fastlane
  - Firebase test labs
- - Change "UseCase" to new see https://github.com/google/iosched
+ - Change "UseCase" to new (see https://github.com/google/iosched)
  - Migrating from Dagger to Koin
  - Migrating from Mockito to Mockk
 

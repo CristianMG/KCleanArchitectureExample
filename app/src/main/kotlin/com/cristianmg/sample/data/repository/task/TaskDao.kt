@@ -20,7 +20,7 @@
 package com.cristianmg.sample.data.repository.task
 
 import androidx.room.*
-import com.cristianmg.sample.data.entity.TaskEntity
+import com.cristianmg.common_value_object.TaskEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 

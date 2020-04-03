@@ -59,7 +59,6 @@ class Navigator
 
     private fun showTechnicalScreen(context: Context) {
         context.startActivity(TechnicalActivity.callingIntent(context))
-
     }
 
     private fun showAdminScreen(context: Context) {

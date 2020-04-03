@@ -25,9 +25,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.cristianmg.sample.data.entity.FarmEntity
-import com.cristianmg.sample.data.entity.TaskEntity
-import com.cristianmg.sample.data.entity.UserEntity
+import com.cristianmg.common_value_object.FarmEntity
+import com.cristianmg.common_value_object.TaskEntity
+import com.cristianmg.common_value_object.UserEntity
 import com.cristianmg.sample.data.repository.Converters
 import com.cristianmg.sample.data.repository.farm.FarmDao
 import com.cristianmg.sample.data.repository.task.TaskDao

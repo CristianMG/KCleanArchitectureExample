@@ -26,7 +26,7 @@ android {
     def config = rootProject.extensions.getByName("ext")
 
     compileSdkVersion config["compile_sdk"]
-    buildToolsVersion '28.0.3'
+    buildToolsVersion config["build_tools"]
 
     defaultConfig {
         applicationId config["application_id"]
@@ -118,8 +118,6 @@ dependencies {
     implementation applicationDependencies.androidAnnotations
     implementation applicationDependencies.glide
     implementation applicationDependencies.dagger
-    implementation applicationDependencies.retrofit
-    implementation applicationDependencies.okhttpLoggingInterceptor
     implementation applicationDependencies.room
     kapt applicationDependencies.room_compiler
     //implementation applicationDependencies.room_coroutines
@@ -151,6 +149,8 @@ dependencies {
     debugImplementation developmentDependencies.leakCanary
     releaseImplementation developmentDependencies.leakCanaryNoop
     testImplementation developmentDependencies.leakCanaryNoop
+    implementation project(path: ':repositories')
+//    implementation project(path: ':common-value-object')
 }
 
 androidExtensions {

@@ -24,7 +24,7 @@ import com.cristianmg.sample.core.exception.Failure
 import com.cristianmg.sample.core.functional.Either
 import com.cristianmg.sample.core.platform.NetworkHandler
 import com.cristianmg.sample.data.AppDatabase
-import com.cristianmg.sample.data.entity.FarmEntity
+import com.cristianmg.common_value_object.FarmEntity
 import com.cristianmg.sample.data.repository.farm.api.FarmService
 import com.cristianmg.sample.domain.model.Farm
 import retrofit2.Call

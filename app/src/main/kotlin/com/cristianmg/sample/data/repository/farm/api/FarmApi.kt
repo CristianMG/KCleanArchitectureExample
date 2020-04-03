@@ -19,7 +19,7 @@
 
 package com.cristianmg.sample.data.repository.farm.api
 
-import com.cristianmg.sample.data.entity.FarmEntity
+import com.cristianmg.common_value_object.FarmEntity
 import retrofit2.Call
 import retrofit2.http.GET
 

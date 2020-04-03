@@ -20,7 +20,7 @@
 package com.cristianmg.sample.domain.model
 
 import android.os.Parcelable
-import com.cristianmg.sample.data.entity.FarmerLocation
+import com.cristianmg.common_value_object.FarmerLocation
 import kotlinx.android.parcel.Parcelize
 
 

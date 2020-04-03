@@ -20,6 +20,7 @@
 package com.cristianmg.sample.data.entity
 
 import androidx.room.*
+import com.cristianmg.common_value_object.UserEntity
 import com.cristianmg.sample.data.repository.mapping.DateFormat
 import com.cristianmg.sample.domain.model.Task
 import com.cristianmg.sample.domain.model.TypeTask
