@@ -19,15 +19,38 @@
 
 package com.cristianmg.api.di
 
+import android.content.Context
+import com.google.gson.Gson
+import dagger.BindsInstance
 import dagger.Component
+import retrofit2.Retrofit
 import javax.inject.Singleton
 
+
+interface ApiComponent {
+    @Singleton
+    fun provideRetrofit(): Retrofit
+    @Singleton
+    fun provideGson(): Gson
+
+    companion object {
+        @Volatile
+        @JvmStatic
+        lateinit var INSTANCE: ApiComponent
+    }
+
+}
+
+
+@Singleton
 @Component(
         modules = [ApiModule::class]
 )
-@Singleton
-interface ApiComponent {
+internal interface InternalApiComponent : ApiComponent {
 
-
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance applicationContext: Context): InternalApiComponent
+    }
 
 }

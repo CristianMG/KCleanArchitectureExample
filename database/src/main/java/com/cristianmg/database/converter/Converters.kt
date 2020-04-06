@@ -20,7 +20,6 @@
 package com.cristianmg.database.converter
 
 import androidx.room.TypeConverter
-import com.cristianmg.sample.data.repository.mapping.DateFormat
 import java.util.*
 
 

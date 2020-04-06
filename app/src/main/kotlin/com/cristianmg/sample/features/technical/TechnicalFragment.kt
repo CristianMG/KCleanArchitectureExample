@@ -29,12 +29,12 @@ import com.cristianmg.sample.core.extension.viewModel
 import com.cristianmg.sample.core.imageloader.ImageLoader
 import com.cristianmg.sample.core.navigation.Navigator
 import com.cristianmg.sample.core.platform.BaseFragment
-import com.cristianmg.sample.domain.model.Task
 import kotlinx.android.synthetic.main.fragment_technical.*
 import javax.inject.Inject
 import android.view.MenuInflater
 import android.view.Menu
 import android.view.MenuItem
+import com.cristianmg.model.Task
 
 
 class TechnicalFragment : BaseFragment() {

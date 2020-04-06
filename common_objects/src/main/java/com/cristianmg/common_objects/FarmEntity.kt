@@ -51,4 +51,4 @@ data class FarmEntity(
 
         @SerializedName("location_1")
         @Embedded
-        val location: FarmerLocation? = null)
+        val locationEntity: FarmerLocationEntity? = null)

@@ -27,14 +27,14 @@ import com.cristianmg.sample.core.platform.BaseFragment
 
 import androidx.databinding.DataBindingUtil
 import br.com.ilhasoft.support.validation.Validator
+import com.cristianmg.common_objects.exception.Failure
+import com.cristianmg.model.User
 import com.cristianmg.sample.R
-import com.cristianmg.sample.core.exception.Failure
 import com.cristianmg.sample.core.extension.failure
 import com.cristianmg.sample.core.extension.observe
 import com.cristianmg.sample.core.extension.viewModel
 import com.cristianmg.sample.core.navigation.Navigator
 import com.cristianmg.sample.databinding.FragmentLoginBinding
-import com.cristianmg.sample.domain.model.User
 import javax.inject.Inject
 
 

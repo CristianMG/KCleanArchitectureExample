@@ -45,6 +45,17 @@ android {
         }
     }
 
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+
 }
 
 dependencies {
@@ -52,12 +63,12 @@ dependencies {
     def mainDependencies = rootProject.ext.mainApplication
 
     implementation mainDependencies.kotlin
-    implementation apiDependencies.retrofit_converter
+    api apiDependencies.retrofit_converter
     implementation apiDependencies.okhttpLoggingInterceptor
 
     //Dagger dependencies
     kapt mainDependencies.daggerCompiler
     implementation mainDependencies.dagger
+    api project(path: ':common_objects')
 
-    implementation project(path: ':common_objects')
 }

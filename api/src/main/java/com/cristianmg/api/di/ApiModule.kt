@@ -20,6 +20,7 @@
 package com.cristianmg.api.di
 
 import com.cristianmg.api.BuildConfig
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -39,6 +40,12 @@ class ApiModule {
                 .client(createClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return Gson()
     }
 
     private fun createClient(): OkHttpClient {

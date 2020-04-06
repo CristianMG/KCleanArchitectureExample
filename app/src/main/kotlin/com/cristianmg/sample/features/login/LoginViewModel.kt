@@ -21,10 +21,10 @@ package com.cristianmg.sample.features.login
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
+import com.cristianmg.domain.Authenticator
+import com.cristianmg.domain.Login
+import com.cristianmg.model.User
 import com.cristianmg.sample.core.platform.BaseViewModel
-import com.cristianmg.sample.domain.Authenticator
-import com.cristianmg.sample.domain.Login
-import com.cristianmg.sample.domain.model.User
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val login: Login,

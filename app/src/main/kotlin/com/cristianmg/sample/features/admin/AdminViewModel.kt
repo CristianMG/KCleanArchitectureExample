@@ -21,12 +21,12 @@ package com.cristianmg.sample.features.admin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.cristianmg.domain.AssignTaskLessWorkloadTechnical
+import com.cristianmg.domain.Authenticator
+import com.cristianmg.model.Task
+import com.cristianmg.model.TypeTask
+import com.cristianmg.model.User
 import com.cristianmg.sample.core.platform.BaseViewModel
-import com.cristianmg.sample.domain.AssignTaskLessWorkloadTechnical
-import com.cristianmg.sample.domain.Authenticator
-import com.cristianmg.sample.domain.model.Task
-import com.cristianmg.sample.domain.model.TypeTask
-import com.cristianmg.sample.domain.model.User
 import java.util.*
 import javax.inject.Inject
 

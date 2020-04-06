@@ -45,6 +45,6 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideDarmDao(database: AppDatabase): FarmDao = database.farmDAO()
+    fun provideFarmDao(database: AppDatabase): FarmDao = database.farmDAO()
 
 }

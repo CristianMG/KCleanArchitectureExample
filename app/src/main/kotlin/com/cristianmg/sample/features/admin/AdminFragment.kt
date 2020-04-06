@@ -32,9 +32,10 @@ import com.cristianmg.sample.core.navigation.Navigator
 import com.cristianmg.sample.databinding.FragmentAdminBinding
 import javax.inject.Inject
 import androidx.appcompat.app.AlertDialog
-import com.cristianmg.sample.core.exception.Failure
+import com.cristianmg.common_objects.exception.Failure
+import com.cristianmg.model.TypeTask
+import com.cristianmg.sample.core.extension.getResource
 import com.cristianmg.sample.core.extension.observe
-import com.cristianmg.sample.domain.model.TypeTask
 
 
 class AdminFragment : BaseFragment(), Validator.ValidationListener {
@@ -110,7 +111,6 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
     }
 
 
-
     override fun layoutId() = R.layout.fragment_admin
 
     override fun onValidationError() =
@@ -123,7 +123,7 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
 
         fun showTaskDialog() {
             context?.let { ctx ->
-                val items = TypeTask.getTaskTypeResource().map { ctx.getString(it) }
+                val items =    TypeTask.getTypeTaskList().map { ctx.getString(it.getResource()) }
                 val itemSelected = viewModel.typeTask.value ?: 0
                 AlertDialog.Builder(ctx)
                         .setTitle(getString(R.string.select_type_task_to_select))
@@ -141,7 +141,7 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
 
         fun getTypeTask(index: Int?, context: Context): String {
             return index?.let {
-                TypeTask.getTaskTypeStringFromIndex(index, context)
+                TypeTask.getTypeTaskList().getOrNull(index)?.getResource()?.let { context.getString(it) } ?: ""
             } ?: context.getString(R.string.type_task)
         }
 

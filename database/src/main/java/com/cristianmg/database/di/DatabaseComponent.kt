@@ -19,14 +19,45 @@
 
 package com.cristianmg.database.di
 
+import android.content.Context
+import com.cristianmg.database.AppDatabase
+import com.cristianmg.database.dao.FarmDao
+import com.cristianmg.database.dao.TaskDao
+import com.cristianmg.database.dao.UserDao
+import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
+interface DatabaseComponent {
+    @Singleton
+    fun provideDatabase(): AppDatabase
+    @Singleton
+    fun provideUserDao(): UserDao
+    @Singleton
+    fun provideTaskDao(): TaskDao
+    @Singleton
+    fun provideFarmDao(): FarmDao
+
+    companion object {
+
+        @Volatile
+        @JvmStatic
+        lateinit var INSTANCE: DatabaseComponent
+    }
+
+
+}
+
+
+@Singleton
 @Component(
         modules = [DatabaseModule::class]
 )
-@Singleton
-interface DatabaseComponent {
+internal interface InternalDatabaseComponent : DatabaseComponent {
 
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance applicationContext: Context): InternalDatabaseComponent
+    }
 
 }

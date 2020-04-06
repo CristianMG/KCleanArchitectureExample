@@ -28,5 +28,5 @@ internal interface FarmApi {
         private const val FARMS_ENDPOINT = "resource/hma6-9xbg.json "
     }
 
-    @GET(FARMS_ENDPOINT) fun farms(): Call<List<FarmEntity>>
+    @GET(FARMS_ENDPOINT) fun farms(): List<FarmEntity>
 }

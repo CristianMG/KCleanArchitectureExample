@@ -19,13 +19,21 @@
 
 package com.cristianmg.api
 
+import com.cristianmg.common_objects.FarmEntity
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class FarmService @Inject constructor(retrofit: Retrofit) : FarmApi {
+class FarmService @Inject constructor(retrofit: Retrofit) {
 
-    private val farmApi by lazy { retrofit.create(FarmApi::class.java) }
+    private val farmApi by lazy { ApiImpl(retrofit) }
 
-    override fun farms() = farmApi.farms()
+    fun farms() = farmApi.farms()
+
+    inner class ApiImpl(retrofit: Retrofit) : FarmApi {
+        private val farmApi by lazy { retrofit.create(FarmApi::class.java) }
+
+        override fun farms(): List<FarmEntity> = farmApi.farms()
+
+    }
 
 }

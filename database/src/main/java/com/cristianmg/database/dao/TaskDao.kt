@@ -20,7 +20,8 @@
 package com.cristianmg.database.dao
 
 import androidx.room.*
-import com.cristianmg.common_value_object.TaskEntity
+import com.cristianmg.common_objects.TaskEntity
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 
@@ -33,6 +34,7 @@ interface TaskDao {
             """)
     fun getTaskByUser(userId: String): Flow<List<TaskEntity>>
 
+    @ExperimentalCoroutinesApi
     fun getTaskByUserUntilChanged(userId: String) =
             getTaskByUser(userId).distinctUntilChanged()
 

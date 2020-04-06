@@ -56,4 +56,10 @@ data class UserEntity(
         @ColumnInfo(name = "typeTaskAvailable")
         val typeTaskAvailable: List<Int>
 
-)
+){
+
+        companion object {
+                const val ROLE_ADMIN = 1
+                const val ROLE_TECHNICAL = 2
+        }
+}
