@@ -22,17 +22,19 @@ package com.cristianmg.sample.features.technical
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.cristianmg.domain.Authenticator
+import com.cristianmg.domain.CompleteTaskCase
+import com.cristianmg.model.Task
+import com.cristianmg.repositories.TaskRepository
+import com.cristianmg.repositories.di.qualifiers.Disk
 import com.cristianmg.sample.core.platform.BaseViewModel
-import com.cristianmg.sample.data.repository.task.TaskRepository
-import com.cristianmg.sample.domain.Authenticator
-import com.cristianmg.sample.domain.CompleteTaskCase
-import com.cristianmg.sample.domain.model.Task
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TechnicalViewModel @Inject constructor(
         private val authenticator: Authenticator,
+        @Disk
         private val taskRepository: TaskRepository,
         private val completeTaskCaseCase: CompleteTaskCase
 ) : BaseViewModel() {

@@ -20,7 +20,7 @@ package com.cristianmg.sample.core.platform
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.cristianmg.sample.core.exception.Failure
+import com.cristianmg.common_objects.exception.Failure
 
 /**
  * Base ViewModel class with default Failure handling.

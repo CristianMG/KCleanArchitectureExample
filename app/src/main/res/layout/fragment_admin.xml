@@ -23,7 +23,7 @@
 
     <data>
 
-        <import type="com.cristianmg.sample.domain.model.TypeTask" />
+        <import type="com.cristianmg.model.TypeTask" />
 
         <variable
             name="viewModel"

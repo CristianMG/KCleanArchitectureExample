@@ -22,7 +22,7 @@ package com.cristianmg.sample.core.extension
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.cristianmg.sample.core.exception.Failure
+import com.cristianmg.common_objects.exception.Failure
 
 fun <T : Any, L : LiveData<T>> LifecycleOwner.observe(liveData: L, body: (T?) -> Unit) =
         liveData.observe(this, Observer(body))

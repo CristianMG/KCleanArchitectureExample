@@ -19,6 +19,14 @@
 
 package com.cristianmg.sample.core.di
 
+import android.content.Context
+import com.cristianmg.repositories.FarmRepository
+import com.cristianmg.repositories.SessionRepository
+import com.cristianmg.repositories.TaskRepository
+import com.cristianmg.repositories.UserRepository
+import com.cristianmg.repositories.di.RepositoryComponent
+import com.cristianmg.repositories.di.qualifiers.Cloud
+import com.cristianmg.repositories.di.qualifiers.Disk
 import com.cristianmg.sample.AndroidApplication
 import com.cristianmg.sample.core.di.viewmodel.ViewModelModule
 import com.cristianmg.sample.core.navigation.RouteActivity
@@ -26,17 +34,46 @@ import com.cristianmg.sample.features.admin.AdminFragment
 import com.cristianmg.sample.features.farm.FarmFragment
 import com.cristianmg.sample.features.login.LoginFragment
 import com.cristianmg.sample.features.technical.TechnicalFragment
+import dagger.BindsInstance
 import dagger.Component
+import dagger.Provides
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApplicationModule::class, ViewModelModule::class])
+@Component(
+        modules = [ApplicationModule::class, ViewModelModule::class],
+        dependencies = [RepositoryComponent::class]
+)
 interface ApplicationComponent {
+
+
     fun inject(application: AndroidApplication)
     fun inject(routeActivity: RouteActivity)
-
     fun inject(loginFragment: LoginFragment)
     fun inject(adminFragment: AdminFragment)
     fun inject(technicalFragment: TechnicalFragment)
     fun inject(farmFragment: FarmFragment)
+
+
+    @Component.Factory
+    interface Factory {
+        fun create(
+                @BindsInstance applicationContext: Context,
+                repositoryComponent: RepositoryComponent
+        ): ApplicationComponent
+
+    }
+    
+
+    companion object {
+        /**
+         * The singleton instance for [ApplicationComponent].
+         * This is initialised by the `presentation` layer itself and primarily used to inject dependencies.
+         * The instance can be replaced with a mock for testing when necessary.
+         */
+        @Volatile
+        @JvmStatic
+        lateinit var INSTANCE: ApplicationComponent
+    }
+
 }
