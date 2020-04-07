@@ -19,6 +19,7 @@
 
 package com.cristianmg.common_objects
 
+import androidx.annotation.IntDef
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
@@ -48,6 +49,7 @@ data class UserEntity(
         @ColumnInfo(name = "name")
         val name: String,
 
+        @Role
         @SerializedName("role")
         @ColumnInfo(name = "role")
         val role: Int,
@@ -63,3 +65,14 @@ data class UserEntity(
                 const val ROLE_TECHNICAL = 2
         }
 }
+
+
+@Retention(AnnotationRetention.SOURCE)
+@IntDef(PRODUCT_SUPPLIER, COLLECTOR, WRAPPER)
+annotation class Role
+
+
+// Declare the constants
+const val PRODUCT_SUPPLIER = 0
+const val COLLECTOR = 1
+const val WRAPPER = 2

@@ -36,5 +36,16 @@ class SampleData {
             return Gson().fromJson(context.loadJSONFromAsset("UserSampleData.json"), turnsType)
         }
 
+
+        fun getSingleUser(context: Context): UserEntity {
+            val turnsType = object : TypeToken<List<UserEntity>>() {}.type
+            return Gson().fromJson<List<UserEntity>>(context.loadJSONFromAsset("UserSampleData.json"), turnsType).random()
+        }
+
+
+        @VisibleForTesting
+        fun getUser(uuid: String = UUID.randomUUID().toString(), taskAvailable: List<Int>, role: Int): UserEntity =
+                UserEntity(uuid, "example@example.com", "example", "example", role, taskAvailable)
+
     }
 }

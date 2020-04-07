@@ -17,16 +17,14 @@
  *
  */
 
-package com.cristianmg.sample.data.repository
+package com.cristianmg.database
 
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.test.core.app.ApplicationProvider
-import com.cristianmg.sample.BuildConfig
-import com.cristianmg.sample.data.AppDatabase
-import com.cristianmg.sample.data.repository.mapping.DateFormat
+import com.cristianmg.database.converter.DateFormat
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -44,7 +42,9 @@ open class DatabaseTest {
     open fun before() {
         context = ApplicationProvider.getApplicationContext()
         db = Room.inMemoryDatabaseBuilder(
-                context, AppDatabase::class.java).build()
+                context, AppDatabase::class.java)
+                .allowMainThreadQueries()
+                .build()
 
         setInMemoryRoomDatabases(db.openHelper.readableDatabase)
     }

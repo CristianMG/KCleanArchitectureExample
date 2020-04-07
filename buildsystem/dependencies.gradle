@@ -46,10 +46,13 @@ ext {
     debug_database_version = '1.0.6'
     gson = '2.8.6'
     //Unit Testing
-    robolectric_version = '3.8'
+    robolectric_version = '4.3.1'
     junit_version = '4.12'
     mockito_version = '1.4.0'
     kluent_version = '1.60'
+    android_x_test = '1.1.0'
+    android_arch_testing = '2.0.0-alpha1'
+    assertK = '0.22'
 
     //Acceptance Testing
     runner_version = '1.0.2-alpha1'
@@ -85,8 +88,8 @@ ext {
             debug_database         : "com.amitshekhar.android:debug-db:$debug_database_version",
             ktx_viewmodel          : "androidx.lifecycle:lifecycle-viewmodel-ktx:$ktx_version_view_model",
             timber                 : "com.jakewharton.timber:timber:$timber_version",
-            paging_library_runtime: "androidx.paging:paging-runtime:$paging_version",
-            paging_library_ktx    : "androidx.paging:paging-runtime-ktx:$paging_version"
+            paging_library_runtime : "androidx.paging:paging-runtime:$paging_version",
+            paging_library_ktx     : "androidx.paging:paging-runtime-ktx:$paging_version"
     ]
 
     api = [
@@ -116,12 +119,18 @@ ext {
 
 
     unitTesting = [
-            kotlin     : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-            kotlinTest : "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version",
-            robolectric: "org.robolectric:robolectric:$robolectric_version",
-            junit      : "junit:junit:$junit_version",
-            mockito    : "com.nhaarman:mockito-kotlin:$mockito_version",
-            kluent     : "org.amshove.kluent:kluent:$kluent_version",
+            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            kotlinTest     : "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version",
+            robolectric    : "org.robolectric:robolectric:$robolectric_version",
+            junit          : "junit:junit:$junit_version",
+            mockito        : "com.nhaarman:mockito-kotlin:$mockito_version",
+            kluent         : "org.amshove.kluent:kluent:$kluent_version",
+            testRunner     : "androidx.test:runner:$android_x_test",
+            extRunner      : "androidx.test.ext:junit:$android_x_test",
+            coroutines_test: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlin_coroutines_version",
+            testRules                : "androidx.test:rules:$android_x_test",
+            android_arch_core_testing: "androidx.arch.core:core-testing:$android_arch_testing",
+            assertK: "com.willowtreeapps.assertk:assertk-jvm:$assertK"
     ]
 
     acceptanceTesting = [

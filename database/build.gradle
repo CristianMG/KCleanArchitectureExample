@@ -56,24 +56,43 @@ android {
         jvmTarget = '1.8'
     }
 
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
 
-    def databaseDependencies = rootProject.ext.database
     def mainDependencies = rootProject.ext.mainApplication
-
     implementation mainDependencies.kotlin
+    kapt mainDependencies.daggerCompiler
+    implementation mainDependencies.dagger
 
-    implementation databaseDependencies.room
-    kapt databaseDependencies.room_compiler
+    def databaseDependencies = rootProject.ext.database
     implementation databaseDependencies.ktx_room
     implementation databaseDependencies.paging_library_runtime
     implementation databaseDependencies.paging_library_ktx
-
-    kapt mainDependencies.daggerCompiler
-    implementation mainDependencies.dagger
+    implementation databaseDependencies.room
+    kapt databaseDependencies.room_compiler
     implementation databaseDependencies.gson
+
+    def unitTestDependencies = rootProject.ext.unitTesting
+    testImplementation unitTestDependencies.kotlin
+    testImplementation unitTestDependencies.kotlinTest
+    testImplementation unitTestDependencies.robolectric
+    testImplementation unitTestDependencies.junit
+    testImplementation unitTestDependencies.mockito
+    testImplementation unitTestDependencies.kluent
+    testImplementation unitTestDependencies.testRunner
+    testImplementation unitTestDependencies.extRunner
+    testImplementation unitTestDependencies.coroutines_test
+    testImplementation unitTestDependencies.testRules
+    testImplementation unitTestDependencies.android_arch_core_testing
+    testImplementation unitTestDependencies.assertK
+
     api project(path: ':common_objects')
+
 
 }

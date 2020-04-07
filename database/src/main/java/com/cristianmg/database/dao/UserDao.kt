@@ -42,11 +42,10 @@ interface UserDao {
     @Query("""
         SELECT * FROM user WHERE user.id =(
         SELECT userID FROM(
-        
         SELECT user.id as userID,
-            (SELECT SUM(task.duration) from task WHERE task.date=:date AND task.user_id = user.id) AS total 
-             FROM user
-             WHERE instr(user.typeTaskAvailable,:skill) AND user.role = ${UserEntity.ROLE_TECHNICAL}) ORDER BY total ASC LIMIT 1
+        (SELECT SUM(task.duration) from task WHERE task.date=:date AND task.user_id = user.id) AS total
+        FROM user
+        WHERE user.typeTaskAvailable LIKE '%' || :skill || '%' AND user.role = ${UserEntity.ROLE_TECHNICAL}) ORDER BY total ASC LIMIT 1
         ) 
      
                  """)

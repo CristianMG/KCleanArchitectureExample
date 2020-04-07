@@ -17,19 +17,16 @@
  *
  */
 
-package com.cristianmg.sample.data.repository
+package com.cristianmg.database
 
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.all
 import assertk.assertThat
 import assertk.assertions.*
-import com.cristianmg.sample.data.SampleData
-import com.cristianmg.common_value_object.TaskEntity
-import com.cristianmg.common_value_object.UserEntity
-import com.cristianmg.sample.data.repository.task.TaskDao
-import com.cristianmg.sample.data.repository.user.UserDao
-import com.cristianmg.sample.domain.model.TypeTask
+import com.cristianmg.common_objects.*
+import com.cristianmg.database.dao.TaskDao
+import com.cristianmg.database.dao.UserDao
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
@@ -42,10 +39,8 @@ import java.util.*
 @RunWith(AndroidJUnit4::class)
 class TaskDaoTest : DatabaseTest() {
 
-
     private lateinit var taskDao: TaskDao
     private lateinit var userDao: UserDao
-
 
     override fun before() {
         super.before()
@@ -53,26 +48,25 @@ class TaskDaoTest : DatabaseTest() {
         userDao = db.userDAO()
     }
 
-
     @ExperimentalCoroutinesApi
     @Test
     fun getTaskByUserTest() = runBlockingTest {
         val dateNow = dateFormat.parseCalendarToDatabaseFormat(Calendar.getInstance())
-        val userOne = SampleData.getUser("465c120a-148f-457f-9082-4408e499ff2f", mutableListOf(TypeTask.WRAPPER, TypeTask.COLLECTOR), UserEntity.ROLE_TECHNICAL)
+        val userOne = SampleData.getUser("465c120a-148f-457f-9082-4408e499ff2f", mutableListOf(WRAPPER, COLLECTOR), UserEntity.ROLE_TECHNICAL)
 
         userDao.insert(userOne)
         assertThat(taskDao.getTaskByUserUntilChanged(userOne.id).take(1).toList().first()).isEmpty()
 
-        val entitys = mutableListOf(
-                TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userOne.id, duration = 30, date = dateNow, complete = false),
-                TaskEntity(typeTask = TypeTask.WRAPPER.idTask, userId = userOne.id, duration = 60, date = dateNow, complete = true),
-                TaskEntity(typeTask = TypeTask.PRODUCT_SUPPLIER.idTask, userId = userOne.id, duration = 120, date = dateNow, complete = false))
+        val entityList = mutableListOf(
+                TaskEntity(typeTask = COLLECTOR, userId = userOne.id, duration = 30, date = dateNow, complete = false),
+                TaskEntity(typeTask = WRAPPER, userId = userOne.id, duration = 60, date = dateNow, complete = true),
+                TaskEntity(typeTask = PRODUCT_SUPPLIER, userId = userOne.id, duration = 120, date = dateNow, complete = false))
 
-        taskDao.insert(entitys)
+        taskDao.insert(entityList)
 
         assertThat(taskDao.getTaskByUserUntilChanged(userOne.id).take(1).toList().first()).all {
             hasSize(3)
-            isEqualTo(entitys)
+            isEqualTo(entityList)
         }
 
     }
@@ -81,8 +75,8 @@ class TaskDaoTest : DatabaseTest() {
     @Test
     fun getAll() = runBlockingTest {
         val dateNow = dateFormat.parseCalendarToDatabaseFormat(Calendar.getInstance())
-        val userOne = SampleData.getUser("465c120a-148f-457f-9082-4408e499ff2f", mutableListOf(TypeTask.WRAPPER, TypeTask.COLLECTOR), UserEntity.ROLE_TECHNICAL)
-        val userTwo = SampleData.getUser("fc2ce8fa-d168-4ced-851f-bd7dfcc1c6d3", mutableListOf(TypeTask.WRAPPER), UserEntity.ROLE_TECHNICAL)
+        val userOne = SampleData.getUser("465c120a-148f-457f-9082-4408e499ff2f", mutableListOf(WRAPPER, COLLECTOR), UserEntity.ROLE_TECHNICAL)
+        val userTwo = SampleData.getUser("fc2ce8fa-d168-4ced-851f-bd7dfcc1c6d3", mutableListOf(WRAPPER), UserEntity.ROLE_TECHNICAL)
 
         userDao.insert(userOne)
         userDao.insert(userTwo)
@@ -90,8 +84,8 @@ class TaskDaoTest : DatabaseTest() {
         assertThat(taskDao.getAll()).isEmpty()
 
         val entitys = mutableListOf(
-                TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userOne.id, duration = 30, date = dateNow, complete = false),
-                TaskEntity(typeTask = TypeTask.PRODUCT_SUPPLIER.idTask, userId = userTwo.id, duration = 120, date = dateNow, complete = false))
+                TaskEntity(typeTask = COLLECTOR, userId = userOne.id, duration = 30, date = dateNow, complete = false),
+                TaskEntity(typeTask = PRODUCT_SUPPLIER, userId = userTwo.id, duration = 120, date = dateNow, complete = false))
 
         taskDao.insert(entitys)
 
@@ -106,11 +100,11 @@ class TaskDaoTest : DatabaseTest() {
     @Test
     fun updateTask() = runBlockingTest {
         val dateNow = dateFormat.parseCalendarToDatabaseFormat(Calendar.getInstance())
-        val userOne = SampleData.getUser("465c120a-148f-457f-9082-4408e499ff2f", mutableListOf(TypeTask.WRAPPER, TypeTask.COLLECTOR), UserEntity.ROLE_TECHNICAL)
+        val userOne = SampleData.getUser("465c120a-148f-457f-9082-4408e499ff2f", mutableListOf(WRAPPER, COLLECTOR), UserEntity.ROLE_TECHNICAL)
 
         userDao.insert(userOne)
 
-        val entity = TaskEntity(typeTask = TypeTask.COLLECTOR.idTask, userId = userOne.id, duration = 30, date = dateNow, complete = false)
+        val entity = TaskEntity(typeTask = COLLECTOR, userId = userOne.id, duration = 30, date = dateNow, complete = false)
 
         taskDao.insert(entity)
 
