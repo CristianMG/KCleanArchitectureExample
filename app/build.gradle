@@ -26,7 +26,7 @@ android {
     def config = rootProject.extensions.getByName("ext")
 
     compileSdkVersion config["compile_sdk"]
-    buildToolsVersion '28.0.3'
+    buildToolsVersion config["build_tools"]
 
     defaultConfig {
         applicationId config["application_id"]
@@ -90,6 +90,16 @@ android {
         test.java.srcDirs += 'src/test/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
@@ -118,12 +128,7 @@ dependencies {
     implementation applicationDependencies.androidAnnotations
     implementation applicationDependencies.glide
     implementation applicationDependencies.dagger
-    implementation applicationDependencies.retrofit
-    implementation applicationDependencies.okhttpLoggingInterceptor
-    implementation applicationDependencies.room
-    kapt applicationDependencies.room_compiler
     //implementation applicationDependencies.room_coroutines
-    implementation applicationDependencies.ktx_room
     implementation applicationDependencies.data_binding_validator
     implementation applicationDependencies.ktx_viewmodel
     implementation applicationDependencies.timber
@@ -151,6 +156,7 @@ dependencies {
     debugImplementation developmentDependencies.leakCanary
     releaseImplementation developmentDependencies.leakCanaryNoop
     testImplementation developmentDependencies.leakCanaryNoop
+    implementation project(path: ':business')
 }
 
 androidExtensions {

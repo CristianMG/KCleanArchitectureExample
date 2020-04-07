@@ -24,8 +24,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.cristianmg.model.Task
 import com.cristianmg.sample.core.imageloader.ImageLoader
-import com.cristianmg.sample.domain.model.Task
 
 class TaskAdapter(
         private val context: Context,

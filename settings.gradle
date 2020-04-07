@@ -18,3 +18,9 @@
  */
 
 include ':app'
+include ':common_objects'
+include ':api'
+include ':database'
+include ':repositories'
+include ':business'
+include ':model'

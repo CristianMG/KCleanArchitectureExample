@@ -1,0 +1,31 @@
+[
+  {
+    "id": "3bf4c53e-5e27-4976-912b-f2ac3cdc95f3",
+    "email": "ruben.garcia@gmail.com",
+    "name": "Rubén García",
+    "password": 12345,
+    "role": 1,
+    "typeTaskAvailable": []
+  },
+  {
+    "id": "844025eb-30d7-476a-b357-af29f87ae655",
+    "email": "rafael.martin@gmail.com",
+    "name": "Rafael Martín",
+    "password": 123456,
+    "role": 2,
+    "typeTaskAvailable": [
+      2
+    ]
+  },
+  {
+    "id": "137c15ab-c7f9-456a-a539-9b85ca7fac1e",
+    "email": "sarah.lopez@gmail.com",
+    "name": "Sarah López",
+    "password": 1234567,
+    "role": 2,
+    "typeTaskAvailable": [
+      1,
+      3
+    ]
+  }
+]

@@ -23,9 +23,10 @@ import android.content.Context
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.cristianmg.model.Task
 import com.cristianmg.sample.R
+import com.cristianmg.sample.core.extension.getResource
 import com.cristianmg.sample.core.imageloader.ImageLoader
-import com.cristianmg.sample.domain.model.Task
 import kotlinx.android.synthetic.main.task_row.view.*
 
 class TaskViewHolder(private val view: View,
@@ -34,11 +35,10 @@ class TaskViewHolder(private val view: View,
                      private val context: Context) : RecyclerView.ViewHolder(view) {
 
     fun bind(toBind: Task) {
-
         view.tvDescription.text = toBind.description
 
         imageLoader.resource {
-            resource { toBind.typeTask.resourceImage }
+            resource { toBind.typeTask.getResource() }
         }.load(view.ivTask)
 
         view.mbAction.setBackgroundColor(ContextCompat.getColor(context, if(toBind.complete) R.color.grey else  R.color.kcleanArchitecture_blue))

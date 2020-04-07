@@ -22,9 +22,9 @@ package com.cristianmg.sample.features.farm
 import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.cristianmg.model.Farm
 import com.cristianmg.sample.R
 import com.cristianmg.sample.core.imageloader.ImageLoader
-import com.cristianmg.sample.domain.model.Farm
 import kotlinx.android.synthetic.main.farm_row.view.*
 
 class FarmViewHolder(private val view: View,

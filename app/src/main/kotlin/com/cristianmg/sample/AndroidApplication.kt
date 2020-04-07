@@ -20,24 +20,30 @@
 package com.cristianmg.sample
 
 import android.app.Application
+import com.cristianmg.repositories.di.RepositoryInitializer
 import com.cristianmg.sample.core.di.ApplicationComponent
-import com.cristianmg.sample.core.di.ApplicationModule
 import com.cristianmg.sample.core.di.DaggerApplicationComponent
 import com.squareup.leakcanary.LeakCanary
 
 class AndroidApplication : Application() {
 
-    val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
-        DaggerApplicationComponent
-                .builder()
-                .applicationModule(ApplicationModule(this))
-                .build()
-    }
+    private val repositoryInitializer: RepositoryInitializer by lazy { RepositoryInitializer() }
+
+    lateinit var appComponent: ApplicationComponent
 
     override fun onCreate() {
         super.onCreate()
+        initAppInjector()
         this.injectMembers()
         this.initializeLeakDetection()
+    }
+
+    private fun initAppInjector() {
+        val component = DaggerApplicationComponent
+                .factory()
+                .create(this, repositoryInitializer.initialize(this))
+        ApplicationComponent.INSTANCE = component
+        appComponent = component
     }
 
     private fun injectMembers() = appComponent.inject(this)

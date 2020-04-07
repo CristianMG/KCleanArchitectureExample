@@ -20,8 +20,8 @@
 package com.cristianmg.sample.core.navigation
 
 import android.content.Context
-import com.cristianmg.sample.domain.Authenticator
-import com.cristianmg.sample.domain.model.UserRole
+import com.cristianmg.domain.Authenticator
+import com.cristianmg.model.UserRole
 import com.cristianmg.sample.features.admin.AdminActivity
 import com.cristianmg.sample.features.farm.FarmActivity
 import com.cristianmg.sample.features.login.LoginActivity
@@ -59,7 +59,6 @@ class Navigator
 
     private fun showTechnicalScreen(context: Context) {
         context.startActivity(TechnicalActivity.callingIntent(context))
-
     }
 
     private fun showAdminScreen(context: Context) {

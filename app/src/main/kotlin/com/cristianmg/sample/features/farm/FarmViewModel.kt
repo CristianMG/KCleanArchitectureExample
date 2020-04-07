@@ -18,12 +18,11 @@
  */
 
 package com.cristianmg.sample.features.farm
-
 import androidx.paging.toLiveData
-import com.cristianmg.sample.core.di.qualifiers.Disk
+import com.cristianmg.domain.UpdateFarmsCase
+import com.cristianmg.repositories.FarmRepository
+import com.cristianmg.repositories.di.qualifiers.Disk
 import com.cristianmg.sample.core.platform.BaseViewModel
-import com.cristianmg.sample.data.repository.farm.FarmRepository
-import com.cristianmg.sample.domain.UpdateFarmsCase
 import javax.inject.Inject
 
 class FarmViewModel @Inject constructor(

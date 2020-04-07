@@ -24,8 +24,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.cristianmg.model.Farm
 import com.cristianmg.sample.core.imageloader.ImageLoader
-import com.cristianmg.sample.domain.model.Farm
 
 class FarmAdapter(
         private val context: Context,
