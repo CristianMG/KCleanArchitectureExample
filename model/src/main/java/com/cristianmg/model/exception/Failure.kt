@@ -37,6 +37,6 @@ sealed class Failure {
 
     class MappingError(
             @SuppressWarnings("unused")
-            e: Throwable) : FeatureFailure()
+            val e: Throwable) : FeatureFailure()
 
 }

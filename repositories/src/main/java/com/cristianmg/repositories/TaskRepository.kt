@@ -46,6 +46,7 @@ interface TaskRepository {
                 Either.wrapFunction { taskMapper.mapListToModel(cache.getAll()) }
 
         override fun insertTaskToUser(task: Task, user: User) = Either.wrapFunction {
+            task.userId = user.id
             cache.insert(taskMapper.mapToEntity(task))
         }
 

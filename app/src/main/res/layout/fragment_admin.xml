@@ -37,22 +37,25 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="15dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="15dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
             android:hint="@string/description_task"
             app:layout_constraintTop_toBottomOf="@+id/view"
             app:startIconDrawable="@drawable/ic_list_admin_add_task">
@@ -74,11 +77,13 @@
             android:id="@+id/tilHours"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="15dp"
             android:layout_weight="2"
             android:hint="@string/hours"
-            app:startIconDrawable="@drawable/ic_clock"
-            app:layout_constraintTop_toBottomOf="@+id/tilDescription">
+            app:layout_constraintTop_toBottomOf="@+id/tilDescription"
+            app:startIconDrawable="@drawable/ic_clock">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etHours"
@@ -97,7 +102,9 @@
             style="@style/KCleanArchitecture.Input.EventInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
             android:drawableEnd="@drawable/ic_download"
             android:onClick="@{() -> handlers.showTaskDialog()}"
             android:text='@{handlers.getTypeTask(viewModel.typeTask,context)}'
@@ -110,7 +117,9 @@
             style="@style/KCleanArchitecture.Buttons.BlueButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="40dp"
+            android:layout_marginEnd="15dp"
             android:onClick="@{() -> handlers.addTask()}"
             android:text="@string/add_new_task"
             app:layout_constraintTop_toBottomOf="@+id/tvTypeTask" />

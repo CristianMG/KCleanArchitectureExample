@@ -17,25 +17,21 @@
  *
  */
 
-package com.cristianmg.sample.core.navigation
+package com.cristianmg.sample.features.splash
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.cristianmg.sample.AndroidApplication
-import com.cristianmg.sample.core.di.ApplicationComponent
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.cristianmg.sample.core.platform.BaseViewModel
 import javax.inject.Inject
 
-class RouteActivity : AppCompatActivity() {
+class RouteViewModel @Inject constructor() : BaseViewModel() {
 
-    private val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
-        (application as AndroidApplication).appComponent
+    private val _navigateToLogin: MutableLiveData<Boolean> = MutableLiveData()
+    val navigateToLogin: LiveData<Boolean>
+            get() = _navigateToLogin
+
+    fun start() {
+        _navigateToLogin.value = true
     }
 
-    @Inject internal lateinit var navigator: Navigator
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        appComponent.inject(this)
-        navigator.showMain(this)
-    }
 }

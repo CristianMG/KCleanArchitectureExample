@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * Copyright 2020 Cristian Menárguez González
   ~  *
@@ -18,9 +17,12 @@
   ~
   -->
 
-<resources>
-    <item type="id" name="image_loader_tag"/>
-    <item type="id" name="image_loader_background_tag"/>
-    <item type="id" name="splash_fragment"/>
-    <item type="id" name="login_fragment"/>
-</resources>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <translate
+        android:duration="300"
+        android:fromXDelta="-100%"
+        android:fromYDelta="0%"
+        android:toXDelta="0%"
+        android:toYDelta="0%" />
+</set>

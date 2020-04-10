@@ -16,20 +16,26 @@
  *
  *
  */
+package com.cristianmg.domain
 
-package com.cristianmg.model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-import java.util.*
+import com.cristianmg.common_objects.exception.Failure
+import com.cristianmg.common_objects.functional.Either
+import kotlinx.coroutines.delay
+import javax.inject.Inject
 
-@Parcelize
-data class Task(
-        val id: String,
-        val typeTask: TypeTask,
-        var userId: String,
-        val description: String,
-        val secondsToComplete: Int,
-        val date: Calendar,
-        var complete: Boolean
-) : Parcelable
+class SplashDelay
+@Inject constructor() : UseCase<Unit, SplashDelay.Params>() {
+
+    override suspend fun run(params: Params): Either<Failure, Unit> {
+        delay(TIME_TO_DELAY_SPLASH)
+        return Either.Right(Unit)
+    }
+
+
+    data class Params(val empty: Boolean = true)
+
+    companion object {
+        const val TIME_TO_DELAY_SPLASH = 1000L
+    }
+}

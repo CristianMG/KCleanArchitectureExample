@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.cristianmg.sample.features.admin.AdminViewModel
 import com.cristianmg.sample.features.farm.FarmViewModel
 import com.cristianmg.sample.features.login.LoginViewModel
+import com.cristianmg.sample.features.splash.RouteViewModel
 import com.cristianmg.sample.features.technical.TechnicalViewModel
 import dagger.Binds
 import dagger.Module
@@ -50,10 +51,14 @@ abstract class ViewModelModule {
     @ViewModelKey(TechnicalViewModel::class)
     abstract fun bindsTechnicalViewModel(technicalViewModel: TechnicalViewModel): ViewModel
 
-
     @Binds
     @IntoMap
     @ViewModelKey(FarmViewModel::class)
     abstract fun bindsFarmViewModel(farmViewModel: FarmViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RouteViewModel::class)
+    abstract fun bindsSplashViewModel(routeViewModel: RouteViewModel): ViewModel
 
 }

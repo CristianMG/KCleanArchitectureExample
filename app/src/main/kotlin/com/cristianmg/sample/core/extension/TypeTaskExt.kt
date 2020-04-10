@@ -30,3 +30,12 @@ fun TypeTask.getResource():Int{
         TypeTask.UNKNOWN -> 1
     }
 }
+
+fun TypeTask.getResourceString():Int{
+    return when (this) {
+        TypeTask.WRAPPER -> R.string.wrapper
+        TypeTask.COLLECTOR -> R.string.collector
+        TypeTask.PRODUCT_SUPPLIER -> R.string.product_supplier
+        TypeTask.UNKNOWN -> 1
+    }
+}
