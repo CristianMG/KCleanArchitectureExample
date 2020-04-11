@@ -17,23 +17,10 @@
  *
  */
 
-package com.cristianmg.sample.features.technical
+package com.cristianmg.api.functional
 
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import com.cristianmg.sample.R
-import com.cristianmg.sample.core.platform.ContentActivity
+import retrofit2.Call
 
-class TechnicalActivity : ContentActivity() {
+class RetrofitCall<T>(val call: Call<T>) {
 
-    companion object {
-        fun callingIntent(context: Context) = Intent(context, TechnicalActivity::class.java)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setTitle(R.string.task_list)
-    }
-    override fun fragment() = TechnicalFragment()
 }

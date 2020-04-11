@@ -27,7 +27,7 @@ import java.util.*
 data class Task(
         val id: String,
         val typeTask: TypeTask,
-        val userId: String,
+        var userId: String,
         val description: String,
         val secondsToComplete: Int,
         val date: Calendar,

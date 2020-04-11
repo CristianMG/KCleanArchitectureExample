@@ -17,17 +17,21 @@
  *
  */
 
-package com.cristianmg.sample.features.farm
+package com.cristianmg.sample.features.splash
 
-import android.content.Context
-import android.content.Intent
-import com.cristianmg.sample.core.platform.ContentActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.cristianmg.sample.core.platform.BaseViewModel
+import javax.inject.Inject
 
-class FarmActivity : ContentActivity() {
+class RouteViewModel @Inject constructor() : BaseViewModel() {
 
-    companion object {
-        fun callingIntent(context: Context) = Intent(context, FarmActivity::class.java)
+    private val _navigateToLogin: MutableLiveData<Boolean> = MutableLiveData()
+    val navigateToLogin: LiveData<Boolean>
+            get() = _navigateToLogin
+
+    fun start() {
+        _navigateToLogin.value = true
     }
 
-    override fun fragment() = FarmFragment()
 }

@@ -32,9 +32,10 @@ import com.cristianmg.sample.core.navigation.Navigator
 import com.cristianmg.sample.databinding.FragmentAdminBinding
 import javax.inject.Inject
 import androidx.appcompat.app.AlertDialog
-import com.cristianmg.common_objects.exception.Failure
+import androidx.navigation.fragment.findNavController
+import com.cristianmg.model.exception.Failure
 import com.cristianmg.model.TypeTask
-import com.cristianmg.sample.core.extension.getResource
+import com.cristianmg.sample.core.extension.getResourceString
 import com.cristianmg.sample.core.extension.observe
 
 
@@ -76,8 +77,7 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
                             .setNegativeButton(R.string.close_session
                             ) { _, _ ->
                                 viewModel.closeSession()
-                                navigator.showLogin(ctx)
-                                // User cancelled the dialog
+                                findNavController().navigate(AdminFragmentDirections.actionAdminFragmentToSplashFragment())
                             }.create().show()
 
                 }
@@ -105,11 +105,10 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
         when (item.itemId) {
-            R.id.goToFarms -> context?.let { navigator.showFarms(it) }
+            R.id.goToFarms -> findNavController().navigate(AdminFragmentDirections.actionAdminFragmentToFarmFragment())
         }
         return true
     }
-
 
     override fun layoutId() = R.layout.fragment_admin
 
@@ -123,7 +122,7 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
 
         fun showTaskDialog() {
             context?.let { ctx ->
-                val items =    TypeTask.getTypeTaskList().map { ctx.getString(it.getResource()) }
+                val items = TypeTask.getTypeTaskList().map { ctx.getString(it.getResourceString()) }
                 val itemSelected = viewModel.typeTask.value ?: 0
                 AlertDialog.Builder(ctx)
                         .setTitle(getString(R.string.select_type_task_to_select))
@@ -135,13 +134,10 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
             }
         }
 
-        fun showDurationDialog() {
-
-        }
-
         fun getTypeTask(index: Int?, context: Context): String {
             return index?.let {
-                TypeTask.getTypeTaskList().getOrNull(index)?.getResource()?.let { context.getString(it) } ?: ""
+                TypeTask.getTypeTaskList().getOrNull(index)?.getResourceString()?.let { context.getString(it) }
+                        ?: ""
             } ?: context.getString(R.string.type_task)
         }
 

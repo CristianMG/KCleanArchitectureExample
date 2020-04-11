@@ -20,7 +20,7 @@
 package com.cristianmg.domain
 
 
-import com.cristianmg.common_objects.exception.Failure
+import com.cristianmg.model.exception.Failure
 import com.cristianmg.common_objects.functional.Either
 import com.cristianmg.common_objects.functional.flatMap
 import com.cristianmg.model.Task

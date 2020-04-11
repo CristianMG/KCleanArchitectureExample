@@ -36,7 +36,7 @@ class AdminViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     var durationHours: MutableLiveData<String> = MutableLiveData()
-    var durationMinutes: MutableLiveData<String> = MutableLiveData()
+    private var durationMinutes: MutableLiveData<String> = MutableLiveData()
 
 
     var description: MutableLiveData<String> = MutableLiveData()

@@ -19,50 +19,33 @@
 
 package com.cristianmg.sample.core.navigation
 
-import android.content.Context
+import androidx.navigation.NavController
 import com.cristianmg.domain.Authenticator
 import com.cristianmg.model.UserRole
-import com.cristianmg.sample.features.admin.AdminActivity
-import com.cristianmg.sample.features.farm.FarmActivity
-import com.cristianmg.sample.features.login.LoginActivity
-import com.cristianmg.sample.features.technical.TechnicalActivity
+import com.cristianmg.sample.features.login.LoginFragmentDirections
 import javax.inject.Inject
 import javax.inject.Singleton
-
 
 @Singleton
 class Navigator
 @Inject constructor(private val authenticator: Authenticator) {
 
-    fun showLogin(context: Context) = context.startActivity(LoginActivity.callingIntent(context))
-
-    fun showMain(context: Context) {
-        when (authenticator.userLoggedIn()) {
-            true -> {
-                authenticator.userLogged?.let {
-                    if (it.role == UserRole.ROLE_ADMIN) {
-                        showAdminScreen(context)
-                    } else {
-                        showTechnicalScreen(context)
-                    }
-                } ?: run {
-                    showLogin(context)
-                }
+    fun showMain(navController: NavController) {
+        authenticator.userLogged?.let {
+            if (it.role == UserRole.ROLE_ADMIN) {
+                showAdminScreen(navController)
+            } else {
+                showTechnicalScreen(navController)
             }
-            false -> showLogin(context)
         }
     }
 
-    fun showFarms(context: Context) {
-        context.startActivity(FarmActivity.callingIntent(context))
+    private fun showTechnicalScreen(navController: NavController) {
+        navController.navigate(LoginFragmentDirections.actionLoginFragmentToTechnicalFragment())
     }
 
-    private fun showTechnicalScreen(context: Context) {
-        context.startActivity(TechnicalActivity.callingIntent(context))
-    }
-
-    private fun showAdminScreen(context: Context) {
-        context.startActivity(AdminActivity.callingIntent(context))
+    private fun showAdminScreen(navController: NavController) {
+        navController.navigate(LoginFragmentDirections.actionLoginFragmentToAdminFragment())
     }
 
 }

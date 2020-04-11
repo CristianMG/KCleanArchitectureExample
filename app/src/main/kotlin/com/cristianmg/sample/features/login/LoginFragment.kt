@@ -26,8 +26,9 @@ import android.view.ViewGroup
 import com.cristianmg.sample.core.platform.BaseFragment
 
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import br.com.ilhasoft.support.validation.Validator
-import com.cristianmg.common_objects.exception.Failure
+import com.cristianmg.model.exception.Failure
 import com.cristianmg.model.User
 import com.cristianmg.sample.R
 import com.cristianmg.sample.core.extension.failure
@@ -69,13 +70,13 @@ class LoginFragment : BaseFragment(), Validator.ValidationListener {
     //TODO IMPORTANT hardcoded login to test
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel.email.set("sarah.lopez@gmail.com")
-        loginViewModel.password.set("1234567")
+        loginViewModel.email.set("ruben.garcia@gmail.com")
+        loginViewModel.password.set("12345")
     }
 
     private fun handleLoginSuccessful(user: User?) {
         notify(R.string.login_successful)
-        context?.let { navigator.showMain(it) }
+        navigator.showMain(findNavController())
     }
 
     private fun handleFailure(failure: Failure?) {

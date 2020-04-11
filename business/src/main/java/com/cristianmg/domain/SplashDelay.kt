@@ -16,26 +16,26 @@
  *
  *
  */
+package com.cristianmg.domain
 
-package com.cristianmg.sample.core.navigation
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.cristianmg.sample.AndroidApplication
-import com.cristianmg.sample.core.di.ApplicationComponent
+import com.cristianmg.model.exception.Failure
+import com.cristianmg.common_objects.functional.Either
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
-class RouteActivity : AppCompatActivity() {
+class SplashDelay
+@Inject constructor() : UseCase<Unit, SplashDelay.Params>() {
 
-    private val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
-        (application as AndroidApplication).appComponent
+    override suspend fun run(params: Params): Either<Failure, Unit> {
+        delay(TIME_TO_DELAY_SPLASH)
+        return Either.Right(Unit)
     }
 
-    @Inject internal lateinit var navigator: Navigator
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        appComponent.inject(this)
-        navigator.showMain(this)
+    data class Params(val empty: Boolean = true)
+
+    companion object {
+        const val TIME_TO_DELAY_SPLASH = 1000L
     }
 }

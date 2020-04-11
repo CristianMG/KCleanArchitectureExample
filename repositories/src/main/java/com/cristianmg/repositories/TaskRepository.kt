@@ -19,7 +19,7 @@
 
 package com.cristianmg.repositories
 
-import com.cristianmg.common_objects.exception.Failure
+import com.cristianmg.model.exception.Failure
 import com.cristianmg.common_objects.functional.Either
 import com.cristianmg.database.dao.TaskDao
 import com.cristianmg.model.Task
@@ -46,6 +46,7 @@ interface TaskRepository {
                 Either.wrapFunction { taskMapper.mapListToModel(cache.getAll()) }
 
         override fun insertTaskToUser(task: Task, user: User) = Either.wrapFunction {
+            task.userId = user.id
             cache.insert(taskMapper.mapToEntity(task))
         }
 
