@@ -22,7 +22,7 @@ jobs:
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
   codecov:
-    - name: Run codecov report
+    name: Run codecov report
     steps:
       - uses: actions/checkout@master
       - uses: codecov/codecov-action@v1
