@@ -22,7 +22,7 @@ package com.cristianmg.sample.features.splash
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.cristianmg.common_objects.exception.Failure
+import com.cristianmg.model.exception.Failure
 import com.cristianmg.sample.core.platform.BaseFragment
 import com.cristianmg.sample.R
 import com.cristianmg.sample.core.extension.failure

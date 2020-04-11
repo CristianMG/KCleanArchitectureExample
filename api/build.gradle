@@ -64,6 +64,7 @@ dependencies {
 
     implementation mainDependencies.kotlin
     api apiDependencies.retrofit_converter
+    //implementation apiDependencies.retrofit
     implementation apiDependencies.okhttpLoggingInterceptor
 
     //Dagger dependencies

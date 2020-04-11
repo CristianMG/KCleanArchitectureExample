@@ -28,7 +28,7 @@ import com.cristianmg.sample.core.platform.BaseFragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import br.com.ilhasoft.support.validation.Validator
-import com.cristianmg.common_objects.exception.Failure
+import com.cristianmg.model.exception.Failure
 import com.cristianmg.model.User
 import com.cristianmg.sample.R
 import com.cristianmg.sample.core.extension.failure

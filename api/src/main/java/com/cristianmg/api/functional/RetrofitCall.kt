@@ -17,19 +17,10 @@
  *
  */
 
-package com.cristianmg.sample.features.login
+package com.cristianmg.api.functional
 
-import android.content.Context
-import android.content.Intent
-import com.cristianmg.sample.core.platform.ContentActivity
+import retrofit2.Call
 
-class LoginActivity : ContentActivity() {
+class RetrofitCall<T>(val call: Call<T>) {
 
-    companion object {
-        fun callingIntent(context: Context) = Intent(context, LoginActivity::class.java)
-    }
-
-    override fun fragment() = LoginFragment()
-
-    override fun isToolbarEnabled(): Boolean = false
 }

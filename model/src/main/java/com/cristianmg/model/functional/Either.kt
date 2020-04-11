@@ -36,8 +36,7 @@
 
 package com.cristianmg.common_objects.functional
 
-import com.cristianmg.common_objects.exception.Failure
-import java.lang.NullPointerException
+import com.cristianmg.model.exception.Failure
 
 /**
  * Represents a value of one of two possible types (a disjoint union).

@@ -58,7 +58,6 @@
             app:destination="@id/technical_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            app:launchSingleTop="false"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/nav_graph"
@@ -79,13 +78,28 @@
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true"/>
 
+        <action
+            android:id="@+id/action_admin_fragment_to_farmFragment"
+            app:destination="@id/farm_fragment" />
+
     </fragment>
 
     <fragment
         android:id="@+id/technical_fragment"
         android:name="com.cristianmg.sample.features.technical.TechnicalFragment"
         android:label="Technical"
-        tools:layout="@layout/fragment_technical" />
+        tools:layout="@layout/fragment_technical" >
+
+        <action
+            android:id="@+id/action_technical_fragment_to_farmFragment"
+            app:destination="@id/farm_fragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/farm_fragment"
+        android:name="com.cristianmg.sample.features.farm.FarmFragment"
+        android:label="Farms" />
 
 
 </navigation>

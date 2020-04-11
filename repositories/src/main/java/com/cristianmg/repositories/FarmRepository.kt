@@ -21,11 +21,13 @@ package com.cristianmg.repositories
 
 import androidx.paging.DataSource
 import com.cristianmg.api.FarmService
-import com.cristianmg.common_objects.exception.Failure
+import com.cristianmg.model.exception.Failure
 import com.cristianmg.common_objects.functional.Either
 import com.cristianmg.database.dao.FarmDao
 import com.cristianmg.api.functional.NetworkHandler
+import com.cristianmg.common_objects.functional.map
 import com.cristianmg.model.Farm
+import com.cristianmg.repositories.ext.toEither
 import com.cristianmg.repositories.mapper.FarmMapper
 import javax.inject.Inject
 
@@ -45,7 +47,6 @@ interface FarmRepository {
                 Either.wrapFunction {
                     cache.delete()
                 }
-
 
         override fun save(it: List<Farm>) =
                 Either.wrapFunction {
@@ -71,7 +72,7 @@ interface FarmRepository {
 
         override fun getAll(): Either<Failure, List<Farm>> {
             return when (networkHandler.isConnected) {
-                true -> Either.wrapFunction { mapper.mapListToModel(service.farms()) }
+                true -> service.farms().toEither().map { mapper.mapListToModel(it) }
                 else -> Either.Left(Failure.NetworkConnection)
             }
         }

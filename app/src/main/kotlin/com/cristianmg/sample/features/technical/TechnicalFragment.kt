@@ -34,6 +34,7 @@ import javax.inject.Inject
 import android.view.MenuInflater
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.fragment.findNavController
 import com.cristianmg.model.Task
 
 
@@ -86,7 +87,7 @@ class TechnicalFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
         when (item.itemId) {
-            R.id.goToFarms -> context?.let { navigator.showFarms(it) }
+            R.id.goToFarms -> findNavController().navigate(TechnicalFragmentDirections.actionTechnicalFragmentToFarmFragment())
         }
         return true
     }

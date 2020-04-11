@@ -17,9 +17,9 @@
  *
  */
 
-package com.cristianmg.common_objects.exception
+package com.cristianmg.model.exception
 
-import com.cristianmg.common_objects.exception.Failure.FeatureFailure
+import com.cristianmg.model.exception.Failure.FeatureFailure
 
 /**
  * Base Class for handling errors/failures/exceptions.
@@ -30,6 +30,7 @@ sealed class Failure {
     object ServerError : Failure()
     object UserNotFound : Failure()
     object TransformError : Failure()
+    object NullBodyPetition : Throwable()
 
 
     /** * Extend this class for feature specific failures.*/

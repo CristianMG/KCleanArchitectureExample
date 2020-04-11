@@ -33,13 +33,10 @@ import com.cristianmg.sample.databinding.FragmentAdminBinding
 import javax.inject.Inject
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
-import com.cristianmg.common_objects.exception.Failure
+import com.cristianmg.model.exception.Failure
 import com.cristianmg.model.TypeTask
-import com.cristianmg.sample.core.extension.getResource
 import com.cristianmg.sample.core.extension.getResourceString
 import com.cristianmg.sample.core.extension.observe
-import com.cristianmg.sample.features.splash.RouteFragmentDirections
-import kotlinx.android.synthetic.main.toolbar.*
 
 
 class AdminFragment : BaseFragment(), Validator.ValidationListener {
@@ -108,7 +105,7 @@ class AdminFragment : BaseFragment(), Validator.ValidationListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
         when (item.itemId) {
-            R.id.goToFarms -> context?.let { navigator.showFarms(it) }
+            R.id.goToFarms -> findNavController().navigate(AdminFragmentDirections.actionAdminFragmentToFarmFragment())
         }
         return true
     }

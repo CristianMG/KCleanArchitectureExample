@@ -64,7 +64,7 @@ ext {
     ktx_version_view_model = '2.1.0-beta01'
     timber_version = '4.7.1'
     paging_version = '2.1.1'
-   // nav_version = '2.3.0-alpha01'
+    // nav_version = '2.3.0-alpha01'
 
     mainApplication = [
             kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -98,6 +98,7 @@ ext {
 
     api = [
             retrofit_converter      : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            retrofit                : "com.squareup.retrofit:$retrofit_version",
             okhttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor_version",
     ]
 

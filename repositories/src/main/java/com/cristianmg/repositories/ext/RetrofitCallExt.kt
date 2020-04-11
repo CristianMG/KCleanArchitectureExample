@@ -17,17 +17,22 @@
  *
  */
 
-package com.cristianmg.sample.features.farm
+package com.cristianmg.repositories.ext
 
-import android.content.Context
-import android.content.Intent
-import com.cristianmg.sample.core.platform.ContentActivity
+import com.cristianmg.api.functional.RetrofitCall
+import com.cristianmg.model.exception.Failure
+import com.cristianmg.common_objects.functional.Either
 
-class FarmActivity : ContentActivity() {
-
-    companion object {
-        fun callingIntent(context: Context) = Intent(context, FarmActivity::class.java)
+fun <T> RetrofitCall<T>.toEither(): Either<Failure, T> {
+    return try {
+        val response = call.execute()
+        when (response.isSuccessful) {
+            true -> {
+                Either.Right(response.body()?: throw Failure.NullBodyPetition)
+            }
+            false -> Either.Left(Failure.ServerError)
+        }
+    } catch (exception: Throwable) {
+        Either.Left(Failure.ServerError)
     }
-
-    override fun fragment() = FarmFragment()
 }

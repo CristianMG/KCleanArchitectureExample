@@ -19,11 +19,9 @@
 
 package com.cristianmg.sample.core.navigation
 
-import android.content.Context
 import androidx.navigation.NavController
 import com.cristianmg.domain.Authenticator
 import com.cristianmg.model.UserRole
-import com.cristianmg.sample.features.farm.FarmActivity
 import com.cristianmg.sample.features.login.LoginFragmentDirections
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -40,10 +38,6 @@ class Navigator
                 showTechnicalScreen(navController)
             }
         }
-    }
-
-    fun showFarms(context: Context) {
-        context.startActivity(FarmActivity.callingIntent(context))
     }
 
     private fun showTechnicalScreen(navController: NavController) {

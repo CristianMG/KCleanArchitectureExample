@@ -43,8 +43,6 @@ class MainActivity : BaseActivity() {
                 )
         )
 
-
-
         toolbar.setupWithNavController(findNavController(R.id.nav_host_fragment),appBarConfiguration)
         findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener { controller, destination, arguments ->
             when(destination.id){
