@@ -21,6 +21,11 @@ jobs:
           java-version: 1.8
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
+      -name: Report test
+        uses: ashley-taylor/junit-report-annotations-action@v1.0
+          if: always()
+          with:
+            access-token: ${{ secrets.GITHUB_TOKEN }}
 
   codecov:
     name: Run codecov report
