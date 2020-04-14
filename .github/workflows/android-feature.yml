@@ -36,16 +36,13 @@ jobs:
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
       - name: Run codecov report
-          runs-on: ubuntu-18.04
-          steps:
-            - uses: actions/checkout@master
-            - uses: codecov/codecov-action@v1
-              with:
-                token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-                file: ./coverage.xml # optional
-                flags: unittests # optional
-                name: codecov-umbrella # optional
-                fail_ci_if_error: true # optional (default = false)
+        uses: codecov/codecov-action@v1
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+            file: ./coverage.xml # optional
+            flags: unittests # optional
+            name: codecov-umbrella # optional
+            fail_ci_if_error: true # optional (default = false)
 
   apk:
     name: Generate APK
