@@ -22,9 +22,10 @@ jobs:
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
       - name: Report test
-        uses: ashley-taylor/junit-report-annotations-action@v1.0
-          with:
-            access-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: IgnusG/jest-report-action@v{ current version }
+        if: always() # Or use "continue-on-error: true" in previous test step
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
 
   codecov:
     name: Run codecov report
