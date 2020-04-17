@@ -21,6 +21,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply from: "$project.rootDir/buildsystem/jacoco.gradle"
 
 android {
 
@@ -43,6 +44,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            testCoverageEnabled false
+        }
+
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
         }
     }
 
@@ -61,7 +68,9 @@ android {
             includeAndroidResources = true
         }
     }
+
 }
+
 
 dependencies {
 
@@ -96,3 +105,5 @@ dependencies {
 
 
 }
+
+

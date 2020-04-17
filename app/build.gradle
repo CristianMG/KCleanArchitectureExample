@@ -22,6 +22,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply from: "$project.rootDir/buildsystem/jacoco.gradle"
 
 android {
     def config = rootProject.extensions.getByName("ext")
@@ -171,3 +172,4 @@ kotlin {
         coroutines "enable"
     }
 }
+

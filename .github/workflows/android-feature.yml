@@ -36,9 +36,16 @@ jobs:
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
 
-  codecov:
+  codecovreport:
+    name: Generate code-cov report with JaCoCo
     needs: test
-    name: Run codecov report
+    runs-on: ubuntu-18.04
+    steps:
+      run: bash ./gradlew testDebugUnitTestCoverage
+
+  codecov:
+    needs: codecovreport
+    name: Upload code Cov to CodeCov
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@master
